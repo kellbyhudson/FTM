@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Coach</title>
+</head>
+<body>
+<h3>Add New Coach</h3>
+<form method="POST" enctype="multipart/form-data">
+    @helper.CSRF.formField
+    <label for="coachname">Coach Name: </label><input type="text" name="coachname" id="coachname" required="required">
+    <br><label for="coachvalue">Coach Salary: </label><input type="text" name="coachvalue" id="coachvalue" required="required">
+    <br><label>Coach Specialty: </label><input type="radio" name="coachspecialtyid" checked="checked" value="1"/>Offense
+    <input type="radio" name="coachspecialtyid" value="2"/>Defense
+    <input type="radio" name="coachspecialtyid" value="3"/>Special Teams
+
+    <br><label>Coach Tier: </label><input type="radio" name="coachtier" checked="checked" value="1">1
+    <input type="radio" name="coachtier" value="2">2
+    <input type="radio" name="coachtier" value="3">3
+    <input type="radio" name="coachtier" value="4">4
+    <input type="radio" name="coachtier" value="5">5
+
+    <br><label for="coachpicture">Picture: </label><input type="file" name="coachpicture" id="coachpicture">
+    <br><input type="submit" value="Save">
+</form>
+</body>
+</html>
