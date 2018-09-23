@@ -1,7 +1,7 @@
 package controllers;
 
 import com.google.common.io.Files;
-import models.Coach;
+import models.TakeOverOrganization;
 import play.data.DynamicForm;
 import play.data.FormFactory;
 import play.db.jpa.JPAApi;
@@ -13,44 +13,41 @@ import play.mvc.Result;
 import javax.inject.Inject;
 import java.io.File;
 
-public class CoachController extends Controller
+public class OrganizationController extends Controller
 {
     private JPAApi jpaApi;
     private FormFactory formFactory;
 
     @Inject
-    public CoachController(JPAApi jpaApi, FormFactory formFactory)
+    public OrganizationController(JPAApi jpaApi, FormFactory formFactory)
     {
         this.jpaApi = jpaApi;
         this.formFactory = formFactory;
     }
 
-    public Result getAddCoach()
+    public Result getAddDatabaseOrganization()
     {
-        return ok(views.html.addcoach.render());
+        return ok(views.html.adddatabaseorganization.render());
     }
 
     @Transactional
-    public Result postAddCoach()
+    public Result postAddDatabaseOrganization()
     {
         DynamicForm form = formFactory.form().bindFromRequest();
 
-        String coachName = form.get("coachname");
-        Integer coachValue = Integer.parseInt(form.get("coachvalue"));
-        Integer coachSpecialtyId = Integer.parseInt(form.get("coachspecialtyid"));
-        Integer coachTier = Integer.parseInt(form.get("coachtier"));
+        String takeOverOrganizationName = form.get("organizationname");
+        Integer organizationSalaryCap = Integer.parseInt(form.get("organizationsalarycap"));
         String result;
 
-        if(coachName.length() <= 50)
+        if(takeOverOrganizationName.length() <= 30)
         {
-            Coach newCoach = new Coach();
-            newCoach.setCoachName(coachName);
-            newCoach.setCoachValue(coachValue);
-            newCoach.setCoachSpecialtyId(coachSpecialtyId);
-            newCoach.setCoachTier(coachTier);
+            TakeOverOrganization newTakeOverOrganization = new TakeOverOrganization();
+            newTakeOverOrganization.setTakeOverOrganizationName(takeOverOrganizationName);
+            newTakeOverOrganization.setOrganizationSalaryCap(organizationSalaryCap);
+
 
             Http.MultipartFormData<File> formData = request().body().asMultipartFormData();
-            Http.MultipartFormData.FilePart<File> filePart = formData.getFile("coachpicture");
+            Http.MultipartFormData.FilePart<File> filePart = formData.getFile("picture");
             File file = filePart.getFile();
 
             byte[] picture;
@@ -60,14 +57,14 @@ public class CoachController extends Controller
                 picture = Files.toByteArray(file);
                 if (picture != null && picture.length > 0)
                 {
-                    newCoach.setCoachPicture(picture);
+                    newTakeOverOrganization.setPicture(picture);
                 }
             } catch (Exception e)
             {
                 picture = null;
             }
 
-            jpaApi.em().persist(newCoach);
+            jpaApi.em().persist(newTakeOverOrganization);
             result = "saved";
         }
         else

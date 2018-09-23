@@ -9,14 +9,14 @@ import javax.persistence.Id;
 public class Coach
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)private int coachId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)private Integer coachId;
     private String coachName;
-    private int coachValue;
-    private int coachSpecialtyId;
-    private int coachTier;
+    private Integer coachValue;
+    private Integer coachSpecialtyId;
+    private Integer coachTier;
     private byte[] coachPicture;
 
-    public int getCoachId()
+    public Integer getCoachId()
     {
         return coachId;
     }
@@ -31,32 +31,32 @@ public class Coach
         this.coachName = coachName;
     }
 
-    public int getCoachValue()
+    public Integer getCoachValue()
     {
         return coachValue;
     }
 
-    public void setCoachValue(int coachValue)
+    public void setCoachValue(Integer coachValue)
     {
         this.coachValue = coachValue;
     }
 
-    public int getCoachSpecialtyId()
+    public Integer getCoachSpecialtyId()
     {
         return coachSpecialtyId;
     }
 
-    public void setCoachSpecialtyId(int coachSpecialtyId)
+    public void setCoachSpecialtyId(Integer coachSpecialtyId)
     {
         this.coachSpecialtyId = coachSpecialtyId;
     }
 
-    public int getCoachTier()
+    public Integer getCoachTier()
     {
         return coachTier;
     }
 
-    public void setCoachTier(int coachTier)
+    public void setCoachTier(Integer coachTier)
     {
         this.coachTier = coachTier;
     }

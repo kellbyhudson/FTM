@@ -38,15 +38,13 @@ public class OwnerController extends Controller
         DynamicForm form = formFactory.form().bindFromRequest();
 
         String ownerName = form.get("ownername");
-        String organizationCity = form.get("organizationcity");
         String organizationName = form.get("organizationname");
         String result;
 
-        if(ownerName.length() <= 50 && organizationCity.length() <= 50 && organizationName.length() <= 50)
+        if(ownerName.length() <= 50 && organizationName.length() <= 50)
         {
             Owner newOwner = new Owner();
             newOwner.setOwnerName(ownerName);
-            newOwner.setOrganizationCity(organizationCity);
             newOwner.setOrganizationName(organizationName);
             jpaApi.em().persist(newOwner);
             result = "Saved";

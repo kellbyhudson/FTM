@@ -9,6 +9,8 @@ POST    /newowner               controllers.OwnerController.postNewOwner
 GET     /addcoach               controllers.CoachController.getAddCoach
 POST    /addcoach               controllers.CoachController.postAddCoach
 
+GET     /addorganization        controllers.OrganizationController.getAddDatabaseOrganization
+POST    /addorganization        controllers.OrganizationController.postAddDatabaseOrganization
 
 
 

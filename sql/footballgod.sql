@@ -38,13 +38,6 @@ CREATE TABLE Player (
 );
 
 
-CREATE TABLE Team (
-                TeamId INT AUTO_INCREMENT NOT NULL,
-                PlayerId INT NOT NULL,
-                PRIMARY KEY (TeamId)
-);
-
-
 CREATE TABLE TakeOverOrganization (
                 TakeOverOrganizationId INT AUTO_INCREMENT NOT NULL,
                 TakeOverOrganizationName VARCHAR(30) NOT NULL,
@@ -57,12 +50,27 @@ CREATE TABLE TakeOverOrganization (
 CREATE TABLE Owner (
                 OwnerId INT AUTO_INCREMENT NOT NULL,
                 OwnerName VARCHAR(50) NOT NULL,
-                OrganizationCity VARCHAR(50) NOT NULL,
                 OrganizationName VARCHAR(50) NOT NULL,
-                TakeOverOrganizationId INT NOT NULL,
-                CoachId INT NOT NULL,
-                TeamId INT NOT NULL,
                 PRIMARY KEY (OwnerId)
+);
+
+
+CREATE TABLE Team (
+                TeamId INT AUTO_INCREMENT NOT NULL,
+                TeamName VARCHAR(50) NOT NULL,
+                TeamCity VARCHAR(50) NOT NULL,
+                OwnerId INT NOT NULL,
+                CoachId INT NOT NULL,
+                TakeOverOrganizationId INT NOT NULL,
+                PRIMARY KEY (TeamId)
+);
+
+
+CREATE TABLE TeamPlayer (
+                TeamPlayerId INT AUTO_INCREMENT NOT NULL,
+                PlayerId INT NOT NULL,
+                TeamId INT NOT NULL,
+                PRIMARY KEY (TeamPlayerId)
 );
 
 
@@ -72,7 +80,7 @@ REFERENCES CoachSpecialty (CoachSpecialtyId)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION;
 
-ALTER TABLE Owner ADD CONSTRAINT coach_owner_fk
+ALTER TABLE Team ADD CONSTRAINT coach_team_fk
 FOREIGN KEY (CoachId)
 REFERENCES Coach (CoachId)
 ON DELETE NO ACTION
@@ -84,20 +92,26 @@ REFERENCES PlayerPosition (PlayerPositionId)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION;
 
-ALTER TABLE Team ADD CONSTRAINT player_team_fk
+ALTER TABLE TeamPlayer ADD CONSTRAINT player_teamplayer_fk
 FOREIGN KEY (PlayerId)
 REFERENCES Player (PlayerId)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION;
 
-ALTER TABLE Owner ADD CONSTRAINT team_owner_fk
-FOREIGN KEY (TeamId)
-REFERENCES Team (TeamId)
+ALTER TABLE Team ADD CONSTRAINT takeoverorganization_team_fk
+FOREIGN KEY (TakeOverOrganizationId)
+REFERENCES TakeOverOrganization (TakeOverOrganizationId)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION;
 
-ALTER TABLE Owner ADD CONSTRAINT takeoverorganization_owner_fk
-FOREIGN KEY (TakeOverOrganizationId)
-REFERENCES TakeOverOrganization (TakeOverOrganizationId)
+ALTER TABLE Team ADD CONSTRAINT owner_team_fk
+FOREIGN KEY (OwnerId)
+REFERENCES Owner (OwnerId)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+ALTER TABLE TeamPlayer ADD CONSTRAINT team_teamplayer_fk
+FOREIGN KEY (TeamId)
+REFERENCES Team (TeamId)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION;
