@@ -1,6 +1,7 @@
 package controllers;
 
 import models.Owner;
+import play.Logger;
 import play.data.DynamicForm;
 import play.data.FormFactory;
 import play.db.jpa.JPAApi;
@@ -48,11 +49,15 @@ public class OwnerController extends Controller
             newOwner.setOrganizationName(organizationName);
             jpaApi.em().persist(newOwner);
             result = "Saved";
+
+            String ownerIdString = newOwner.getOwnerId().toString();
+            session().put("ownerId", ownerIdString);
+            //Logger.debug("Id is" + ownerIdString);
         }
         else
         {
             result = "Not Saved";
         }
-        return ok(result);
+        return redirect("/draftorganization");
     }
 }

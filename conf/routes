@@ -2,29 +2,38 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET     /                       controllers.OwnerController.getStart
-GET     /newowner               controllers.OwnerController.getNewOwner
-POST    /newowner               controllers.OwnerController.postNewOwner
+GET     /                               controllers.OwnerController.getStart
+GET     /newowner                       controllers.OwnerController.getNewOwner
+POST    /newowner                       controllers.OwnerController.postNewOwner
 
-GET     /addcoach               controllers.CoachController.getAddCoach
-POST    /addcoach               controllers.CoachController.postAddCoach
+GET     /addcoach                       controllers.CoachController.getAddCoach
+POST    /addcoach                       controllers.CoachController.postAddCoach
+GET     /draftcoach                     controllers.CoachController.getDraftCoach
+POST    /draftcoach                     controllers.CoachController.postDraftCoach
 
-GET     /addorganization        controllers.OrganizationController.getAddDatabaseOrganization
-POST    /addorganization        controllers.OrganizationController.postAddDatabaseOrganization
-
-
-
+GET     /coachpicture/:coachId          controllers.CoachController.getCoachPicture(coachId:Integer)
 
 
+GET     /addorganization                controllers.OrganizationController.getAddDatabaseOrganization
+POST    /addorganization                controllers.OrganizationController.postAddDatabaseOrganization
+GET     /draftorganization              controllers.OrganizationController.getDraftOrganization
+POST    /draftorganization              controllers.OrganizationController.postDraftOrganization
+
+GET     /organizationpicture/:takeOverOrganizationId    controllers.OrganizationController.getOrganizationPicture(takeOverOrganizationId:Integer)
+
+GET     /setupteam                      controllers.TeamController.getSetupTeam
+POST    /setupteam                      controllers.TeamController.postSetupTeam
+GET     /draftteam                      controllers.TeamController.getDraftTeam
+POST    /draftteam                      controllers.TeamController.postDraftTeam
+GET     /draftplayer/:playerPositionId  controllers.TeamController.getDraftPlayer(playerPositionId:Integer)
+POST    /draftplayer/:playerPositionId  controllers.TeamController.postDraftPlayer(playerPositionId:Integer)
+
+GET     /importplayer                   controllers.ImportController.importPlayer
 
 
 
-# An example controller showing a sample home page
-GET     /index                           controllers.HomeController.index
-# An example controller showing how to use dependency injection
-GET     /count                      controllers.CountController.count
-# An example controller showing how to write asynchronous code
-GET     /message                    controllers.AsyncController.message
+
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

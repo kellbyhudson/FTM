@@ -15,10 +15,32 @@ public class Team
     private Integer ownerId;
     private Integer coachId;
     private Integer takeOverOrganizationId;
+    private Integer teamSalary;
+
+
+    public Integer getTeamId()
+    {
+        return teamId;
+    }
+
+    public void setTeamId(Integer teamId)
+    {
+        this.teamId = teamId;
+    }
 
     public String getTeamName()
     {
         return teamName;
+    }
+
+    public Integer getTeamSalary()
+    {
+        return teamSalary;
+    }
+
+    public void setTeamSalary(Integer teamSalary)
+    {
+        this.teamSalary = teamSalary;
     }
 
     public void setTeamName(String teamName)

@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 
 @Entity
 public class TakeOverOrganization
@@ -11,7 +12,7 @@ public class TakeOverOrganization
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)private Integer takeOverOrganizationId;
     private String takeOverOrganizationName;
-    private Integer organizationSalaryCap;
+    private BigDecimal organizationSalaryCap;
     private byte[] picture;
 
     public String getTakeOverOrganizationName()
@@ -24,12 +25,12 @@ public class TakeOverOrganization
         this.takeOverOrganizationName = takeOverOrganizationName;
     }
 
-    public Integer getOrganizationSalaryCap()
+    public BigDecimal getOrganizationSalaryCap()
     {
         return organizationSalaryCap;
     }
 
-    public void setOrganizationSalaryCap(Integer organizationSalaryCap)
+    public void setOrganizationSalaryCap(BigDecimal organizationSalaryCap)
     {
         this.organizationSalaryCap = organizationSalaryCap;
     }
@@ -42,5 +43,10 @@ public class TakeOverOrganization
     public void setPicture(byte[] picture)
     {
         this.picture = picture;
+    }
+
+    public Integer getTakeOverOrganizationId()
+    {
+        return takeOverOrganizationId;
     }
 }

@@ -13,6 +13,11 @@ public class Owner
     private String ownerName;
     private String organizationName;
 
+    public Integer getOwnerId()
+    {
+        return ownerId;
+    }
+
     public String getOwnerName()
     {
         return ownerName;

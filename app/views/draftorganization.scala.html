@@ -1,7 +1,8 @@
+@(organizations : List[TakeOverOrganization])
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>New Owner</title>
+    <title>Take Over Organization</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
@@ -33,13 +34,23 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <p class="display-2">Welcome to the NFL</p>
+            <p class="display-2">Take Over An Organization</p>
             <form method="POST">
                 @helper.CSRF.formField
-                <label for="ownername">Name: </label><input type="text" name="ownername" id="ownername" placeholder="Your Name Here" required="required">
-                <br><label for="organizationcity">Organization City: </label><input type="text" name="organizationcity" id="organizationcity" placeholder="Headquarter City" required="required">
-                <br><label for="organizationname">Organization Name: </label><input type="text" name="organizationname" id="organizationname" placeholder="Business Name" required="required">
-                <br><input type="submit" value="Continue" >
+                <br><br>
+                <div class="row">
+                    @for(organization <- organizations){
+                    <div class="card" style="width:20rem;margin:20px 0 24px 0">
+                        <img class="card-img-top" src="/organizationpicture/@organization.getTakeOverOrganizationId" alt="image" style="width:100%">
+                        <div class="card-body">
+                            <h4 class="card-title">@organization.getTakeOverOrganizationName</h4>
+                            <p class="card-text">Salary Cap: @organization.getOrganizationSalaryCap</p>
+                            <button class="btn btn-primary" name="Id" id="Id" value="@organization.getTakeOverOrganizationId">SELECT</button>
+                        </div>
+                    </div>
+
+                    }
+                </div>
             </form>
         </div>
     </div>

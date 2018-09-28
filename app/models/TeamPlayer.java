@@ -12,6 +12,10 @@ public class TeamPlayer
     @GeneratedValue(strategy = GenerationType.IDENTITY)private Integer teamPlayerId;
     private Integer playerId;
     private Integer teamId;
+    private String teamPlayerName;
+    private Integer teamPlayerValue;
+    private Integer teamPlayerPositionId;
+
 
     public Integer getPlayerId()
     {
@@ -31,5 +35,35 @@ public class TeamPlayer
     public void setTeamId(Integer teamId)
     {
         this.teamId = teamId;
+    }
+
+    public String getTeamPlayerName()
+    {
+        return teamPlayerName;
+    }
+
+    public void setTeamPlayerName(String teamPlayerName)
+    {
+        this.teamPlayerName = teamPlayerName;
+    }
+
+    public Integer getTeamPlayerValue()
+    {
+        return teamPlayerValue;
+    }
+
+    public void setTeamPlayerValue(Integer teamPlayerValue)
+    {
+        this.teamPlayerValue = teamPlayerValue;
+    }
+
+    public Integer getTeamPlayerPositionId()
+    {
+        return teamPlayerPositionId;
+    }
+
+    public void setTeamPlayerPositionId(Integer teamPlayerPositionId)
+    {
+        this.teamPlayerPositionId = teamPlayerPositionId;
     }
 }

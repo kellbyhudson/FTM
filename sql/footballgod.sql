@@ -27,13 +27,14 @@ CREATE TABLE PlayerPosition (
 CREATE TABLE Player (
                 PlayerId INT AUTO_INCREMENT NOT NULL,
                 PlayerName VARCHAR(50) NOT NULL,
-                PlayerValue INT NOT NULL,
-                PlayerHeightFeet INT NOT NULL,
-                PlayerHeightInches INT NOT NULL,
-                PlayerHeightWeight INT NOT NULL,
-                YearsExperience INT NOT NULL,
+                PlayerAge INT NOT NULL,
+                PlayerValue INT DEFAULT 0 NOT NULL,
+                PlayerHeightFeet INT DEFAULT 0 NOT NULL,
+                PlayerHeightInches INT DEFAULT 0 NOT NULL,
+                PlayerWeight INT DEFAULT 0 NOT NULL,
+                YearsExperience INT DEFAULT 0,
                 PlayerCollege VARCHAR(50),
-                PlayerPositionId INT NOT NULL,
+                PlayerPositionId INT DEFAULT 1 NOT NULL,
                 PRIMARY KEY (PlayerId)
 );
 
@@ -62,6 +63,7 @@ CREATE TABLE Team (
                 OwnerId INT NOT NULL,
                 CoachId INT NOT NULL,
                 TakeOverOrganizationId INT NOT NULL,
+                TeamSalary INT DEFAULT 0,
                 PRIMARY KEY (TeamId)
 );
 
@@ -70,6 +72,10 @@ CREATE TABLE TeamPlayer (
                 TeamPlayerId INT AUTO_INCREMENT NOT NULL,
                 PlayerId INT NOT NULL,
                 TeamId INT NOT NULL,
+                TeamPlayerName VARCHAR(50) NOT NULL,
+                TeamPlayerValue INT NOT NULL,
+                TeamPlayerPositionId INT NOT NULL,
+                SortOrder INT NOT NULL,
                 PRIMARY KEY (TeamPlayerId)
 );
 

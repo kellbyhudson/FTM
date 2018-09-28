@@ -1,16 +1,15 @@
 package models;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Player
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)private Integer playerId;
+    private Integer playerId;
     private String playerName;
+    private Integer playerAge;
     private Integer playerValue;
     private Integer playerHeightFeet;
     private Integer playerHeightInches;
@@ -18,6 +17,16 @@ public class Player
     private Integer yearsExperience;
     private String playerCollege;
     private Integer playerPositionId;
+
+    public Integer getPlayerId()
+    {
+        return playerId;
+    }
+
+    public void setPlayerId(Integer playerId)
+    {
+        this.playerId = playerId;
+    }
 
     public String getPlayerName()
     {
@@ -97,5 +106,15 @@ public class Player
     public void setPlayerPositionId(Integer playerPositionId)
     {
         this.playerPositionId = playerPositionId;
+    }
+
+    public Integer getPlayerAge()
+    {
+        return playerAge;
+    }
+
+    public void setPlayerAge(Integer playerAge)
+    {
+        this.playerAge = playerAge;
     }
 }

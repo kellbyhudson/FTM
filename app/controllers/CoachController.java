@@ -2,6 +2,7 @@ package controllers;
 
 import com.google.common.io.Files;
 import models.Coach;
+import play.Logger;
 import play.data.DynamicForm;
 import play.data.FormFactory;
 import play.db.jpa.JPAApi;
@@ -12,6 +13,7 @@ import play.mvc.Result;
 
 import javax.inject.Inject;
 import java.io.File;
+import java.util.List;
 
 public class CoachController extends Controller
 {
@@ -76,5 +78,37 @@ public class CoachController extends Controller
         }
 
         return ok(result);
+    }
+
+    @Transactional
+    public Result getDraftCoach()
+    {
+        String takeOverOrganizationSQL = "SELECT c FROM Coach c ORDER BY CoachName";
+        List<Coach> coaches = jpaApi.em().createQuery(takeOverOrganizationSQL, Coach.class).getResultList();
+
+        return ok(views.html.draftcoach.render(coaches));
+    }
+
+    public Result postDraftCoach()
+    {
+        DynamicForm form = formFactory.form().bindFromRequest();
+
+        String coachId = form.get("Id");
+
+        session().put("coachId", coachId);
+
+        //Logger.debug("Id is" + coachId);
+
+        return redirect("/setupteam");
+    }
+
+    @Transactional(readOnly = true)
+    public Result getCoachPicture(int coachId)
+    {
+        String sql = "SELECT c FROM Coach c WHERE coachId = :coachId";
+
+        Coach coach = jpaApi.em().createQuery(sql, Coach.class).setParameter("coachId", coachId).getSingleResult();
+
+        return ok(coach.getCoachPicture()).as("image/jpg");
     }
 }

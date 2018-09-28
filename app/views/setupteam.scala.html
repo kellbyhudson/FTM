@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>New Owner</title>
+    <title>New Team</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
@@ -33,12 +33,12 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <p class="display-2">Welcome to the NFL</p>
+            <p class="display-2">Setup Your NFL Team</p>
             <form method="POST">
                 @helper.CSRF.formField
-                <label for="ownername">Name: </label><input type="text" name="ownername" id="ownername" placeholder="Your Name Here" required="required">
-                <br><label for="organizationcity">Organization City: </label><input type="text" name="organizationcity" id="organizationcity" placeholder="Headquarter City" required="required">
-                <br><label for="organizationname">Organization Name: </label><input type="text" name="organizationname" id="organizationname" placeholder="Business Name" required="required">
+                <label for="teamcity">Team City: </label><input type="text" name="teamcity" id="teamcity" placeholder="Team City Here" required="required">
+                <br><label for="teamname">Team Name: </label><input type="text" name="teamname" id="teamname" placeholder="Team Name Here" required="required">
+
                 <br><input type="submit" value="Continue" >
             </form>
         </div>

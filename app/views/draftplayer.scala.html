@@ -1,7 +1,8 @@
+@(playerPosition : PlayerPosition, players : List[Player])
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>New Owner</title>
+    <title>Draft Player</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
@@ -18,7 +19,7 @@
     <div class="collapse navbar-collapse" id="navb">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">?</a>
+                <a class="nav-link" href="/draftteam">Back</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/">Fresh Start</a>
@@ -31,18 +32,32 @@
     </div>
 </nav>
 <div class="container-fluid">
+    <p class="display-2">Draft A @playerPosition.getPlayerPositionName</p>
     <div class="row">
         <div class="col-12">
-            <p class="display-2">Welcome to the NFL</p>
             <form method="POST">
                 @helper.CSRF.formField
-                <label for="ownername">Name: </label><input type="text" name="ownername" id="ownername" placeholder="Your Name Here" required="required">
-                <br><label for="organizationcity">Organization City: </label><input type="text" name="organizationcity" id="organizationcity" placeholder="Headquarter City" required="required">
-                <br><label for="organizationname">Organization Name: </label><input type="text" name="organizationname" id="organizationname" placeholder="Business Name" required="required">
-                <br><input type="submit" value="Continue" >
+                <br><br>
+                <div class="row">
+                    @for(player <- players){
+                    <div class="card" style="width:20rem;margin:20px 0 24px 0">
+                        <div class="card-body">
+                            <h4 class="card-title">@player.getPlayerName</h4>
+                            <p class="card-text">Salary: $ @player.getPlayerValue</p>
+                            <p class="card-text">Height: @player.getPlayerHeightFeet' @player.getPlayerHeightInches"</p>
+                            <p class="card-text">Weight: @player.getPlayerWeight</p>
+                            <p class="card-text">Years Pro: @player.getYearsExperience</p>
+                            <p class="card-text">College: @player.getPlayerCollege</p>
+                            <button class="btn btn-primary" value="@player.getPlayerId" name="Id" id="Id">SELECT</button>
+                        </div>
+                    </div>
+
+                    }
+                </div>
             </form>
         </div>
     </div>
+
 </div>
 </body>
 </html>
