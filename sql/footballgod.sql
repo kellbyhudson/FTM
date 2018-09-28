@@ -1,4 +1,11 @@
 
+CREATE TABLE SortOrder (
+                SortOrderId INT AUTO_INCREMENT NOT NULL,
+                PositionName VARCHAR(30),
+                PRIMARY KEY (SortOrderId)
+);
+
+
 CREATE TABLE CoachSpecialty (
                 CoachSpecialtyId INT AUTO_INCREMENT NOT NULL,
                 CoachSpecialtyName VARCHAR(20) NOT NULL,
@@ -75,10 +82,16 @@ CREATE TABLE TeamPlayer (
                 TeamPlayerName VARCHAR(50) NOT NULL,
                 TeamPlayerValue INT NOT NULL,
                 TeamPlayerPositionId INT NOT NULL,
-                SortOrder INT NOT NULL,
+                SortOrderId INT NOT NULL,
                 PRIMARY KEY (TeamPlayerId)
 );
 
+
+ALTER TABLE TeamPlayer ADD CONSTRAINT sortorder_teamplayer_fk
+FOREIGN KEY (SortOrderId)
+REFERENCES SortOrder (SortOrderId)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
 
 ALTER TABLE Coach ADD CONSTRAINT coachspecialty_coach_fk
 FOREIGN KEY (CoachSpecialtyId)

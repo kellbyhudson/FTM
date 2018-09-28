@@ -25,6 +25,8 @@ public class OwnerController extends Controller
 
     public Result getStart()
     {
+
+
         return ok(views.html.start.render());
     }
 
@@ -42,7 +44,7 @@ public class OwnerController extends Controller
         String organizationName = form.get("organizationname");
         String result;
 
-        if(ownerName.length() <= 50 && organizationName.length() <= 50)
+        if (ownerName.length() <= 50 && organizationName.length() <= 50)
         {
             Owner newOwner = new Owner();
             newOwner.setOwnerName(ownerName);

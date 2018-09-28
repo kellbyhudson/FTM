@@ -1,4 +1,4 @@
-@(playerPosition : PlayerPosition, players : List[Player])
+@(playerPosition : PlayerPosition, playerDetails : List[PlayerDetail])
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,11 +39,11 @@
                 @helper.CSRF.formField
                 <br><br>
                 <div class="row">
-                    @for(player <- players){
+                    @for(player <- playerDetails){
                     <div class="card" style="width:20rem;margin:20px 0 24px 0">
                         <div class="card-body">
                             <h4 class="card-title">@player.getPlayerName</h4>
-                            <p class="card-text">Salary: $ @player.getPlayerValue</p>
+                            <p class="card-text">Salary: @player.getFormattedPlayerValue</p>
                             <p class="card-text">Height: @player.getPlayerHeightFeet' @player.getPlayerHeightInches"</p>
                             <p class="card-text">Weight: @player.getPlayerWeight</p>
                             <p class="card-text">Years Pro: @player.getYearsExperience</p>

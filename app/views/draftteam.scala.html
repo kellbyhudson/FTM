@@ -32,62 +32,75 @@
     </div>
 </nav>
 <div class="container-fluid">
-    <p class="display-2">Draft Your NFL Team</p>
+    <div class="row">
+        <div class="col-8">
+            <p class="display-2">Draft Your NFL Team</p>
+        </div>
+        <div class="col-4">
+
+        </div>
+    </div>
     <div class="row">
         <div class="col-5">
             <form method="POST">
                 <div class="col-12">
                     @helper.CSRF.formField
-                    <label for="quarterback"><a href="/draftplayer/1">Quarterback: </a></label>
+                    <label for="quarterback"><a href="/draftplayer/1"
+                                                class="btn btn-outline-dark">Quarterback: </a></label>
                     <input type="text" name="quarterback" id="quarterback" value="@teamDisplay.getQuarterback.getName"
                            disabled="disabled"
                            required="required">
 
-                    <br><label for="runningback"><a href="/draftplayer/2">Running Back: </a></label>
+                    <br><label for="runningback"><a href="/draftplayer/2" class="btn btn-outline-dark">Running
+                    Back: </a></label>
                     <input type="text" name="runningback" id="runningback" value="@teamDisplay.getRunningBack.getName"
                            disabled="disabled"
                            required="required">
 
-                    <br><label for="widereceiver1"><a href="/draftplayer/3">Wide Receiver: </a></label>
+                    <br><label for="widereceiver1"><a href="/draftplayer/3" class="btn btn-outline-dark">Wide
+                    Receiver: </a></label>
                     <input type="text" name="widereceiver1" id="widereceiver1"
                            value="@teamDisplay.getWideReceiver1.getName" disabled="disabled"
                            required="required">
 
-                    <br><label for="widereceiver2"><a href="/draftplayer/3">Wide Receiver: </a></label>
+                    <br><label for="widereceiver2"><a href="/draftplayer/4" class="btn btn-outline-dark">Wide
+                    Receiver: </a></label>
                     <input type="text" name="widereceiver2" id="widereceiver2"
                            value="@teamDisplay.getWideReceiver2.getName" disabled="disabled"
                            required="required">
 
-                    <br><label for="widereceiver3"><a href="/draftplayer/3">Wide Receiver: </a></label>
+                    <br><label for="widereceiver3"><a href="/draftplayer/5" class="btn btn-outline-dark">Wide
+                    Receiver: </a></label>
                     <input type="text" name="widereceiver3" id="widereceiver3"
                            value="@teamDisplay.getWideReceiver3.getName" disabled="disabled"
                            required="required">
 
-                    <br><label for="tightend"><a href="/draftplayer/4">Tight End: </a></label>
+                    <br><label for="tightend"><a href="/draftplayer/6" class="btn btn-outline-dark">Tight
+                    End: </a></label>
                     <input type="text" name="tightend" id="tightend" value="@teamDisplay.getTightEnd.getName"
                            disabled="disabled" required="required">
 
-                    <br><label for="tackle1"><a href="/draftplayer/5">Tackle: </a></label>
+                    <br><label for="tackle1"><a href="/draftplayer/7" class="btn btn-outline-dark">Tackle: </a></label>
                     <input type="text" name="tackle1" id="tackle1" value="@teamDisplay.getTackle1.getName"
                            disabled="disabled" required="required">
 
-                    <br><label for="tackle2"><a href="/draftplayer/5">Tackle: </a></label>
+                    <br><label for="tackle2"><a href="/draftplayer/8" class="btn btn-outline-dark">Tackle: </a></label>
                     <input type="text" name="tackle2" id="tackle2" value="@teamDisplay.getTackle2.getName"
                            disabled="disabled" required="required">
 
-                    <br><label for="guard1"><a href="/draftplayer/6">Guard: </a></label>
+                    <br><label for="guard1"><a href="/draftplayer/9" class="btn btn-outline-dark">Guard: </a></label>
                     <input type="text" name="guard1" id="guard1" value="@teamDisplay.getGuard1.getName"
                            disabled="disabled" required="required">
 
-                    <br><label for="guard2"><a href="/draftplayer/6">Guard: </a></label>
+                    <br><label for="guard2"><a href="/draftplayer/10" class="btn btn-outline-dark">Guard: </a></label>
                     <input type="text" name="guard2" id="guard2" value="@teamDisplay.getGuard2.getName"
                            disabled="disabled" required="required">
 
-                    <br><label for="center"><a href="/draftplayer/7">Center: </a></label>
+                    <br><label for="center"><a href="/draftplayer/11" class="btn btn-outline-dark">Center: </a></label>
                     <input type="text" name="center" id="center" value="@teamDisplay.getCenter.getName"
                            disabled="disabled" required="required">
 
-                    <br><label for="kicker"><a href="/draftplayer/15">Kicker: </a></label>
+                    <br><label for="kicker"><a href="/draftplayer/12" class="btn btn-outline-dark">Kicker: </a></label>
                     <input type="text" name="kicker" id="kicker" value="@teamDisplay.getKicker.getName"
                            disabled="disabled">
 
@@ -98,51 +111,58 @@
             <form method="POST">
                 <div class="col-12">
                     @helper.CSRF.formField
-                    <label for="defensivetackle1"><a href="/draftplayer/8">Defensive Tackle: </a></label>
+                    <label for="defensivetackle1"><a href="/draftplayer/13" class="btn btn-outline-dark">Defensive
+                        Tackle: </a></label>
                     <input type="text" name="defensivetackle1" id="defensivetackle1"
                            value="@teamDisplay.getDefensiveTackle1.getName" disabled="disabled">
 
-                    <br><label for="defensivetackle2"><a href="/draftplayer/8">Defensive Tackle: </a></label>
+                    <br><label for="defensivetackle2"><a href="/draftplayer/14" class="btn btn-outline-dark">Defensive
+                    Tackle: </a></label>
                     <input type="text" name="defensivetackle2" id="defensivetackle2"
                            value="@teamDisplay.getDefensiveTackle2.getName" disabled="disabled">
 
-                    <br><label for="defensiveend1"><a href="/draftplayer/9">Defensive End: </a></label>
+                    <br><label for="defensiveend1"><a href="/draftplayer/15" class="btn btn-outline-dark">Defensive
+                    End: </a></label>
                     <input type="text" name="defensiveend1" id="defensiveend1"
                            value="@teamDisplay.getDefensiveEnd1.getName" disabled="disabled">
 
-                    <br><label for="defensiveend2"><a href="/draftplayer/9">Defensive End: </a></label>
+                    <br><label for="defensiveend2"><a href="/draftplayer/16" class="btn btn-outline-dark">Defensive
+                    End: </a></label>
                     <input type="text" name="defensiveend2" id="defensiveend2"
                            value="@teamDisplay.getDefensiveEnd2.getName" disabled="disabled">
 
-                    <br><label for="outsidelinebacker1"><a href="/draftplayer/10">Outside Linebacker: </a></label>
+                    <br><label for="outsidelinebacker1"><a href="/draftplayer/17" class="btn btn-outline-dark">Outside
+                    Linebacker: </a></label>
                     <input type="text" name="outsidelinebacker1" id="outsidelinebacker1"
                            value="@teamDisplay.getOutsideLinebacker1.getName" disabled="disabled">
 
-                    <br><label for="insidelinebacker"><a href="/draftplayer/11">Inside Linebacker: </a></label>
+                    <br><label for="insidelinebacker"><a href="/draftplayer/18" class="btn btn-outline-dark">Inside
+                    Linebacker: </a></label>
                     <input type="text" name="insidelinebacker" id="insidelinebacker"
                            value="@teamDisplay.getInsideLinebacker.getName" disabled="disabled">
 
-                    <br><label for="outsidelinebacker2"><a href="/draftplayer/10">Outside Linebacker: </a></label>
+                    <br><label for="outsidelinebacker2"><a href="/draftplayer/19" class="btn btn-outline-dark">Outside
+                    Linebacker: </a></label>
                     <input type="text" name="outsidelinebacker2" id="outsidelinebacker2"
                            value="@teamDisplay.getOutsideLinebacker2.getName" disabled="disabled">
 
-                    <br><label for="safety1"><a href="/draftplayer/12">Safety: </a></label>
+                    <br><label for="safety1"><a href="/draftplayer/20" class="btn btn-outline-dark">Safety: </a></label>
                     <input type="text" name="safety1" id="safety1" value="@teamDisplay.getSafety1.getName"
                            disabled="disabled">
 
-                    <br><label for="safety2"><a href="/draftplayer/12">Safety: </a></label>
+                    <br><label for="safety2"><a href="/draftplayer/21" class="btn btn-outline-dark">Safety: </a></label>
                     <input type="text" name="safety2" id="safety2" value="@teamDisplay.getSafety2.getName"
                            disabled="disabled">
 
-                    <br><label for="cornerback1"><a href="/draftplayer/13">Cornerback: </a></label>
+                    <br><label for="cornerback1"><a href="/draftplayer/22" class="btn btn-outline-dark">Cornerback: </a></label>
                     <input type="text" name="cornerback1" id="cornerback1" value="@teamDisplay.getCornerback1.getName"
                            disabled="disabled">
 
-                    <br><label for="cornerback2"><a href="/draftplayer/13">Cornerback: </a></label>
+                    <br><label for="cornerback2"><a href="/draftplayer/23" class="btn btn-outline-dark">Cornerback: </a></label>
                     <input type="text" name="cornerback2" id="cornerback2" value="@teamDisplay.getCornerback2.getName"
                            disabled="disabled">
 
-                    <br><label for="punter"><a href="/draftplayer/14">Punter: </a></label>
+                    <br><label for="punter"><a href="/draftplayer/24" class="btn btn-outline-dark">Punter: </a></label>
                     <input type="text" name="punter" id="punter" value="@teamDisplay.getPunter.getName"
                            disabled="disabled">
 
@@ -151,33 +171,35 @@
         </div>
         <div class="col-2">
             <div class="col-12">
-                <div class="card">
-                    <div class="card-header bg-light">
+                <div class="row">
+                    <div class="card">
+                        <div class="card-header bg-light">
 
-                        <h4 class="card-title">@teamDetail.getTeamName</h4>
-                        Salary Cap
+                            <h4 class="card-title">@teamDetail.getTeamName</h4>
+                            Salary Cap
+                        </div>
+                        <div class="card-body">
+
+                            <p> @teamDetail.getFormattedOrganizationSalaryCap</p>
+
+                            <p>- @teamDetail.getFormattedTeamSalaryAccrued</p>
+
+                        </div>
+                        <div class="card-footer bg-light">
+                            Balance:
+                            <p>@teamDetail.getFormattedTeamSalaryBalance</p>
+                        </div>
                     </div>
-                    <div class="card-body">
-
-                        <p>$ @teamDetail.getOrganizationSalaryCap</p>
-
-                        <p>- $ @teamDetail.getTeamSalaryAccrued</p>
-
-                    </div>
-                    <div class="card-footer bg-light">
-                        Balance:
-                        <p>@teamDetail.getTeamSalaryBalance</p>
-                    </div>
-
-
+                </div>
+                <div class="row">
+                    <form method="POST">
+                        @helper.CSRF.formField
+                        <br><input class="btn btn-success" type="submit" value="Save Team">
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-    <form method="POST">
-        @helper.CSRF.formField
-        <br><input type="submit" value="Save Team">
-    </form>
 </div>
 </body>
 </html>

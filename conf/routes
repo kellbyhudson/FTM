@@ -25,8 +25,8 @@ GET     /setupteam                      controllers.TeamController.getSetupTeam
 POST    /setupteam                      controllers.TeamController.postSetupTeam
 GET     /draftteam                      controllers.TeamController.getDraftTeam
 POST    /draftteam                      controllers.TeamController.postDraftTeam
-GET     /draftplayer/:playerPositionId  controllers.TeamController.getDraftPlayer(playerPositionId:Integer)
-POST    /draftplayer/:playerPositionId  controllers.TeamController.postDraftPlayer(playerPositionId:Integer)
+GET     /draftplayer/:sortOrderId       controllers.TeamController.getDraftPlayer(sortOrderId:Integer)
+POST    /draftplayer/:sortOrderId       controllers.TeamController.postDraftPlayer(sortOrderId:Integer)
 
 GET     /importplayer                   controllers.ImportController.importPlayer
 

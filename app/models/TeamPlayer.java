@@ -15,6 +15,7 @@ public class TeamPlayer
     private String teamPlayerName;
     private Integer teamPlayerValue;
     private Integer teamPlayerPositionId;
+    private Integer sortOrderId;
 
 
     public Integer getPlayerId()
@@ -65,5 +66,15 @@ public class TeamPlayer
     public void setTeamPlayerPositionId(Integer teamPlayerPositionId)
     {
         this.teamPlayerPositionId = teamPlayerPositionId;
+    }
+
+    public Integer getSortOrderId()
+    {
+        return sortOrderId;
+    }
+
+    public void setSortOrderId(Integer sortOrderId)
+    {
+        this.sortOrderId = sortOrderId;
     }
 }

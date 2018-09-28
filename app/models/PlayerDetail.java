@@ -1,23 +1,18 @@
 package models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.text.NumberFormat;
 
-@Entity
-public class Player
+public class PlayerDetail
 {
-    @Id
     private Integer playerId;
     private String playerName;
-    private Integer playerAge;
     private Integer playerValue;
     private Integer playerHeightFeet;
     private Integer playerHeightInches;
     private Integer playerWeight;
     private Integer yearsExperience;
     private String playerCollege;
-    private Integer playerPositionId;
+    private String formattedPlayerValue;
 
     public Integer getPlayerId()
     {
@@ -99,24 +94,15 @@ public class Player
         this.playerCollege = playerCollege;
     }
 
-    public Integer getPlayerPositionId()
+    public String getFormattedPlayerValue()
     {
-        return playerPositionId;
-    }
+        String currencyString = getPlayerValue().toString();
 
-    public void setPlayerPositionId(Integer playerPositionId)
-    {
-        this.playerPositionId = playerPositionId;
-    }
+        long currencyLong = Long.parseLong(currencyString);
 
-    public Integer getPlayerAge()
-    {
-        return playerAge;
-    }
+        formattedPlayerValue = NumberFormat.getCurrencyInstance().format(currencyLong);
 
-    public void setPlayerAge(Integer playerAge)
-    {
-        this.playerAge = playerAge;
+        return formattedPlayerValue;
     }
 
 }

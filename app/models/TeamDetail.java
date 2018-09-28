@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 
 @Entity
 public class TeamDetail
@@ -21,8 +22,11 @@ public class TeamDetail
     private Integer coachTier;
     private String coachSpecialtyName;
     private String teamName;
-    private String teamSalaryAccrued;
-    private String teamSalaryBalance;
+    private BigDecimal teamSalaryAccrued;
+    private BigDecimal teamSalaryBalance;
+    private String formattedOrganizationSalaryCap;
+    private String formattedTeamSalaryAccrued;
+    private String formattedTeamSalaryBalance;
 
 
     public Integer getOwnerId()
@@ -125,23 +129,69 @@ public class TeamDetail
         this.teamName = teamName;
     }
 
-    public String getTeamSalaryAccrued()
+    public BigDecimal getTeamSalaryAccrued()
     {
         return teamSalaryAccrued;
     }
 
-    public void setTeamSalaryAccrued(String teamSalaryAccrued)
+    public void setTeamSalaryAccrued(BigDecimal teamSalaryAccrued)
     {
         this.teamSalaryAccrued = teamSalaryAccrued;
     }
 
-    public String getTeamSalaryBalance()
+    public void addTeamSalaryAccrued(int addedSalary)
     {
-        return teamSalaryBalance;
+        String salaryString = Integer.toString(addedSalary);
+        BigDecimal salaryAccrual = new BigDecimal(salaryString);
+        teamSalaryAccrued = teamSalaryAccrued.add(salaryAccrual);
     }
 
-    public void setTeamSalaryBalance(String teamSalaryBalance)
+    public BigDecimal getTeamSalaryBalance()
+    {
+        return (organizationSalaryCap.subtract(teamSalaryAccrued));
+    }
+
+    public void setTeamSalaryBalance(BigDecimal teamSalaryBalance)
     {
         this.teamSalaryBalance = teamSalaryBalance;
+    }
+
+    public Integer getTeamId()
+    {
+        return teamId;
+    }
+
+
+    public String getFormattedOrganizationSalaryCap()
+    {
+        String currencyString = organizationSalaryCap.toString();
+
+        long currencyLong = Long.parseLong(currencyString);
+
+        formattedOrganizationSalaryCap = NumberFormat.getCurrencyInstance().format(currencyLong);
+
+        return formattedOrganizationSalaryCap;
+    }
+
+    public String getFormattedTeamSalaryAccrued()
+    {
+        String currencyString = getTeamSalaryAccrued().toString();
+
+        long currencyLong = Long.parseLong(currencyString);
+
+        formattedTeamSalaryAccrued = NumberFormat.getCurrencyInstance().format(currencyLong);
+
+        return formattedTeamSalaryAccrued;
+    }
+
+    public String getFormattedTeamSalaryBalance()
+    {
+        String currencyString = getTeamSalaryBalance().toString();
+
+        long currencyLong = Long.parseLong(currencyString);
+
+        formattedTeamSalaryBalance = NumberFormat.getCurrencyInstance().format(currencyLong);
+
+        return formattedTeamSalaryBalance;
     }
 }
