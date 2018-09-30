@@ -1,8 +1,7 @@
-@(coaches : List[Coach])
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Hire Coach</title>
+    <title>Returning Owner</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
@@ -18,12 +17,6 @@
 
     <div class="collapse navbar-collapse" id="navb">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link text-light" href="#"></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-light" href="/">Logout</a>
-            </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search">
@@ -34,25 +27,17 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <p class="display-2">Hire a Coach</p>
+            <p class="display-2">Welcome Back</p>
             <form method="POST">
                 @helper.CSRF.formField
-                <br><br>
-                <div class="row">
-                    @for(coach <- coaches){
+                <fieldset>
+                    <legend>Owner Login</legend>
+                    <br><label for="ownerEmail">Owner's Email: </label><input type="email" name="ownerEmail" id="ownerEmail" placeholder="Email Address" required="required">
 
-                    <div class="card" style="width:20rem;margin:20px 0 24px 0">
-                        <img class="card-img-top" src="/coachpicture/@coach.getCoachId" alt="image" style="width:100%">
-                        <div class="card-body">
-                            <h4 class="card-title">@coach.getCoachName</h4>
-                            <p class="card-text">Salary: $ @coach.getCoachValue</p>
-                            <p class="card-text">Coach Tier: @coach.getCoachTier</p>
-                            <button class="btn btn-primary" value="@coach.getCoachId" name="Id" id="Id">SELECT</button>
-                        </div>
-                    </div>
-                    }
+                    <br><label for="password">Password: </label><input type="password" name="password" id="password" placeholder="Password" required="required">
 
-                </div>
+                    <br><input type="submit" value="Continue" >
+                </fieldset>
             </form>
         </div>
     </div>

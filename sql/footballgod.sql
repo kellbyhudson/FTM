@@ -58,7 +58,8 @@ CREATE TABLE TakeOverOrganization (
 CREATE TABLE Owner (
                 OwnerId INT AUTO_INCREMENT NOT NULL,
                 OwnerName VARCHAR(50) NOT NULL,
-                OrganizationName VARCHAR(50) NOT NULL,
+                OwnerEmail VARCHAR(50) NOT NULL,
+                OwnerPassword VARCHAR(15) NOT NULL,
                 PRIMARY KEY (OwnerId)
 );
 

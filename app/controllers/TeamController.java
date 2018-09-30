@@ -1,14 +1,12 @@
 package controllers;
 
 import models.*;
-import play.Logger;
 import play.data.DynamicForm;
 import play.data.FormFactory;
 import play.db.jpa.JPAApi;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
-import play.twirl.api.Html;
 
 import javax.inject.Inject;
 import java.math.BigDecimal;
@@ -39,7 +37,11 @@ public class TeamController extends Controller
 
         String teamName = form.get("teamname");
 
+        session().put("teamname", teamName);
+
         String teamCity = form.get("teamcity");
+
+        session().put("teamcity", teamCity);
 
         String ownerIdString = session().get("ownerId");
 
@@ -92,9 +94,11 @@ public class TeamController extends Controller
 
         CoachSpecialty coachSpecialty = jpaApi.em().createQuery(coachSpecialtySQL, CoachSpecialty.class).setParameter("coachSpecialtyId", coach.getCoachSpecialtyId()).getSingleResult();
 
-        String teamPlayersSQL = "SELECT tp FROM TeamPlayer tp ";
+        Integer teamId = Integer.parseInt(session().get("teamId"));
 
-        List<TeamPlayer> teamPlayers = jpaApi.em().createQuery(teamPlayersSQL, TeamPlayer.class).getResultList();
+        String teamPlayersSQL = "SELECT tp FROM TeamPlayer tp WHERE teamId = :teamId";
+
+        List<TeamPlayer> teamPlayers = jpaApi.em().createQuery(teamPlayersSQL, TeamPlayer.class).setParameter("teamId", teamId).getResultList();
 
         TeamDetail teamDetail = new TeamDetail();
         BigDecimal ZERO = new BigDecimal(0);
@@ -286,7 +290,7 @@ public class TeamController extends Controller
         teamDetail.setCoachName(coach.getCoachName());
         teamDetail.setTakeOverOrganizationId(takeOverOrganization.getTakeOverOrganizationId());
         teamDetail.setOwnerName(owner.getOwnerName());
-        teamDetail.setOrganizationName(owner.getOrganizationName());
+        teamDetail.setOrganizationName(owner.getOwnerEmail());
         teamDetail.setOrganizationSalaryCap(takeOverOrganization.getOrganizationSalaryCap());
         teamDetail.setCoachSpecialtyName(coachSpecialty.getCoachSpecialtyName());
         teamDetail.setCoachTier(coach.getCoachTier());
@@ -376,23 +380,13 @@ public class TeamController extends Controller
 
         PlayerPosition playerPosition = jpaApi.em().createQuery(playerPositionSQL, PlayerPosition.class).setParameter("playerPositionId", playerPositionId).getSingleResult();
 
-        String existingTeammateSQL = "SELECT tp FROM TeamPlayer tp WHERE teamPlayerPositionId = :playerPositionId ";
+        String playerSQL = "SELECT p FROM Player p WHERE  playerPositionId = :playerPositionId " +
+                "AND playerId NOT IN (SELECT playerId FROM TeamPlayer tp WHERE teamId = :teamId) " +
+                "ORDER BY playerValue desc ";
 
-        List<TeamPlayer> teamPlayerTeammates = jpaApi.em().createQuery(existingTeammateSQL, TeamPlayer.class).setParameter("playerPositionId", playerPositionId).getResultList();
+        Integer teamId = Integer.parseInt(session().get("teamId"));
 
-        Integer firstTeammateId = 0;
-        Integer secondTeammateId = 0;
-
-
-        for (TeamPlayer teamPlayer : teamPlayerTeammates)
-        {
-            firstTeammateId = teamPlayer.getPlayerId();
-            secondTeammateId = firstTeammateId;
-
-        }
-        String playerSQL = "SELECT p FROM Player p WHERE NOT playerId = :firstTeammateId AND NOT playerId = :secondTeammateId AND playerPositionId = :playerPositionId ORDER BY playerValue desc";
-
-        List<Player> players = jpaApi.em().createQuery(playerSQL, Player.class).setParameter("playerPositionId", playerPositionId).setParameter("firstTeammateId", firstTeammateId).setParameter("secondTeammateId", secondTeammateId).getResultList();
+        List<Player> players = jpaApi.em().createQuery(playerSQL, Player.class).setParameter("playerPositionId", playerPositionId).setParameter("teamId", teamId).getResultList();
 
         List<PlayerDetail> playerDetails = new ArrayList<>();
 

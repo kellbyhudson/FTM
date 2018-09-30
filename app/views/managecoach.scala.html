@@ -1,8 +1,8 @@
-@(organizations : List[TakeOverOrganization])
+@(coaches : List[Coach], coachDetail : CoachDetail)
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Take Over Organization</title>
+    <title>Manage Coach</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
@@ -10,8 +10,8 @@
     <script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin:24px 0;">
-    <a class="navbar-brand" href="/newowner">Home</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary" style="margin:24px 0;">
+    <a class="navbar-brand" href="/login">Home</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -19,10 +19,10 @@
     <div class="collapse navbar-collapse" id="navb">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">?</a>
+                <a class="nav-link text-light" href="/draftteam">Manage Team</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/">Logout</a>
+                <a class="nav-link text-light" href="/">Logout</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
@@ -34,21 +34,23 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <p class="display-2">Take Over An Organization</p>
+            <p class="display-2">Manage Current Coach</p>
             <form method="POST">
                 @helper.CSRF.formField
                 <br><br>
                 <div class="row">
-                    @for(organization <- organizations){
+                    @for(coach <- coaches){
+                    @if(coach.getCoachId == coachDetail.getCoachId){
                     <div class="card" style="width:20rem;margin:20px 0 24px 0">
-                        <img class="card-img-top" src="/organizationpicture/@organization.getTakeOverOrganizationId" alt="image" style="width:100%">
+                        <img class="card-img-top" src="/coachpicture/@coach.getCoachId" alt="image" style="width:100%">
                         <div class="card-body">
-                            <h4 class="card-title">@organization.getTakeOverOrganizationName</h4>
-                            <p class="card-text">Salary Cap: @organization.getOrganizationSalaryCap</p>
-                            <button class="btn btn-primary" name="Id" id="Id" value="@organization.getTakeOverOrganizationId">SELECT</button>
+                            <h4 class="card-title">@coach.getCoachName</h4>
+                            <p class="card-text">Salary: $ @coach.getCoachValue</p>
+                            <p class="card-text">Coach Tier: @coach.getCoachTier</p>
+                            <button class="btn btn-danger" value="@coach.getCoachId" name="Id" id="Id">FIRE</button>
                         </div>
                     </div>
-
+                    }
                     }
                 </div>
             </form>

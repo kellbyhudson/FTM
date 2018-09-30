@@ -10,7 +10,7 @@
     <script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin:24px 0;">
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary" style="margin:24px 0;">
     <a class="navbar-brand" href="/newowner">Home</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
         <span class="navbar-toggler-icon"></span>
@@ -19,10 +19,10 @@
     <div class="collapse navbar-collapse" id="navb">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/draftteam">Back</a>
+                <a class="nav-link text-light" href="/draftteam">Back</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/">Fresh Start</a>
+                <a class="nav-link text-light" href="/">Logout</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
@@ -33,6 +33,13 @@
 </nav>
 <div class="container-fluid">
     <p class="display-2">Draft A @playerPosition.getPlayerPositionName</p>
+    <div class="row">
+        <select name="college">
+            @for(player <- playerDetails){
+            <option value="">@</option>
+            }
+        </select>
+    </div>
     <div class="row">
         <div class="col-12">
             <form method="POST">

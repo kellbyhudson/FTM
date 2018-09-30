@@ -1,13 +1,13 @@
 package controllers;
 
 import models.Owner;
-import play.Logger;
 import play.data.DynamicForm;
 import play.data.FormFactory;
 import play.db.jpa.JPAApi;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.twirl.api.Html;
 
 import javax.inject.Inject;
 
@@ -25,9 +25,13 @@ public class OwnerController extends Controller
 
     public Result getStart()
     {
-
-
+        session().clear();
         return ok(views.html.start.render());
+    }
+
+    public Result getLoginChoice()
+    {
+        return ok(views.html.loginchoice.render());
     }
 
     public Result getNewOwner()
@@ -41,25 +45,44 @@ public class OwnerController extends Controller
         DynamicForm form = formFactory.form().bindFromRequest();
 
         String ownerName = form.get("ownername");
-        String organizationName = form.get("organizationname");
-        String result;
+        String ownerEmail = form.get("ownerEmail");
 
-        if (ownerName.length() <= 50 && organizationName.length() <= 50)
+        String password = form.get("password");
+        String passwordretype = form.get("passwordretype");
+        String result = "";
+
+        if (ownerName.length() <= 50 && ownerEmail.length() <= 50)
         {
             Owner newOwner = new Owner();
             newOwner.setOwnerName(ownerName);
-            newOwner.setOrganizationName(organizationName);
-            jpaApi.em().persist(newOwner);
-            result = "Saved";
+            newOwner.setOwnerEmail(ownerEmail);
+            newOwner.setOwnerPassword(password);
+            if (password.equals(passwordretype))
+            {
+                jpaApi.em().persist(newOwner);
+                result = "draftorganization";
+                String ownerIdString = newOwner.getOwnerId().toString();
+                session().put("ownerId", ownerIdString);
+                session().put("ownerEmail", ownerEmail);
+            }
 
-            String ownerIdString = newOwner.getOwnerId().toString();
-            session().put("ownerId", ownerIdString);
             //Logger.debug("Id is" + ownerIdString);
+
+            else
+            {
+                result = "newowner";
+            }
         }
         else
         {
-            result = "Not Saved";
+            result = "newowner";
         }
-        return redirect("/draftorganization");
+        return redirect("/" + result + "");
+    }
+
+    @Transactional
+    public Result getReturnOwner()
+    {
+        return ok(views.html.returningownerlogin.render());
     }
 }

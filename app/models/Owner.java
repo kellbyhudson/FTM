@@ -11,7 +11,8 @@ public class Owner
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)private Integer ownerId;
     private String ownerName;
-    private String organizationName;
+    private String ownerEmail;
+    private String ownerPassword;
 
     public Integer getOwnerId()
     {
@@ -28,15 +29,23 @@ public class Owner
         this.ownerName = ownerName;
     }
 
-    public String getOrganizationName()
+    public String getOwnerEmail()
     {
-        return organizationName;
+        return ownerEmail;
     }
 
-    public void setOrganizationName(String organizationName)
+    public void setOwnerEmail(String ownerEmail)
     {
-        this.organizationName = organizationName;
+        this.ownerEmail = ownerEmail;
     }
 
+    public String getOwnerPassword()
+    {
+        return ownerPassword;
+    }
 
+    public void setOwnerPassword(String ownerPassword)
+    {
+        this.ownerPassword = ownerPassword;
+    }
 }

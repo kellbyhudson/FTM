@@ -10,8 +10,8 @@
     <script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin:24px 0;">
-    <a class="navbar-brand" href="/newowner">Home</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary" style="margin:24px 0;">
+    <a class="navbar-brand" href="/login">Home</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -19,10 +19,10 @@
     <div class="collapse navbar-collapse" id="navb">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">?</a>
+                <a class="nav-link text-light" href="/managecoach">Manage Coach</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/">Fresh Start</a>
+                <a class="nav-link text-light" href="/">Logout</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
@@ -176,17 +176,16 @@
                         <div class="card-header bg-light">
 
                             <h4 class="card-title">@teamDetail.getTeamName</h4>
-                            Salary Cap
+                            <b>Salary Cap:</b>
+                            <p> @teamDetail.getFormattedOrganizationSalaryCap</p>
                         </div>
                         <div class="card-body">
-
-                            <p> @teamDetail.getFormattedOrganizationSalaryCap</p>
 
                             <p>- @teamDetail.getFormattedTeamSalaryAccrued</p>
 
                         </div>
                         <div class="card-footer bg-light">
-                            Balance:
+                            <b>Balance:</b>
                             <p>@teamDetail.getFormattedTeamSalaryBalance</p>
                         </div>
                     </div>

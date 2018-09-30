@@ -2,6 +2,8 @@ package controllers;
 
 import com.google.common.io.Files;
 import models.Coach;
+import models.CoachDetail;
+import models.Team;
 import play.Logger;
 import play.data.DynamicForm;
 import play.data.FormFactory;
@@ -43,7 +45,7 @@ public class CoachController extends Controller
         Integer coachTier = Integer.parseInt(form.get("coachtier"));
         String result;
 
-        if(coachName.length() <= 50)
+        if (coachName.length() <= 50)
         {
             Coach newCoach = new Coach();
             newCoach.setCoachName(coachName);
@@ -83,12 +85,14 @@ public class CoachController extends Controller
     @Transactional
     public Result getDraftCoach()
     {
-        String takeOverOrganizationSQL = "SELECT c FROM Coach c ORDER BY CoachName";
-        List<Coach> coaches = jpaApi.em().createQuery(takeOverOrganizationSQL, Coach.class).getResultList();
+        String coachSQL = "SELECT c FROM Coach c ORDER BY CoachName";
+        List<Coach> coaches = jpaApi.em().createQuery(coachSQL, Coach.class).getResultList();
+
 
         return ok(views.html.draftcoach.render(coaches));
     }
 
+    @Transactional
     public Result postDraftCoach()
     {
         DynamicForm form = formFactory.form().bindFromRequest();
@@ -97,9 +101,32 @@ public class CoachController extends Controller
 
         session().put("coachId", coachId);
 
-        //Logger.debug("Id is" + coachId);
+        String result = "";
 
-        return redirect("/setupteam");
+        String teamIdText = session().get("teamId");
+
+        if (teamIdText == null)
+        {
+            result = "/setupteam";
+        }
+        else
+        {
+            Integer teamId = Integer.parseInt(session().get("teamId"));
+
+            Logger.debug("teamId is " + teamId);
+
+            String teamSQL = "SELECT t FROM Team t WHERE teamId = :teamId ";
+
+            Team team = jpaApi.em().createQuery(teamSQL, Team.class).setParameter("teamId", teamId).getSingleResult();
+
+            team.setCoachId(Integer.parseInt(coachId));
+
+            jpaApi.em().persist(team);
+
+            result = "/draftteam";
+        }
+
+        return redirect(result);
     }
 
     @Transactional(readOnly = true)
@@ -110,5 +137,29 @@ public class CoachController extends Controller
         Coach coach = jpaApi.em().createQuery(sql, Coach.class).setParameter("coachId", coachId).getSingleResult();
 
         return ok(coach.getCoachPicture()).as("image/jpg");
+    }
+
+    @Transactional
+    public Result getManageCoach()
+    {
+        String coachSQL = "SELECT c FROM Coach c ORDER BY CoachName";
+        List<Coach> coaches = jpaApi.em().createQuery(coachSQL, Coach.class).getResultList();
+
+        Integer teamId = Integer.parseInt(session().get("teamId"));
+
+        String coachDetailSQL = "SELECT coachId FROM Team t WHERE teamId = :teamId ";
+
+        Integer coachId = jpaApi.em().createQuery(coachDetailSQL, Integer.class).setParameter("teamId", teamId).getSingleResult();
+
+        CoachDetail coachDetail = new CoachDetail();
+
+        coachDetail.setCoachId(coachId);
+
+        return ok(views.html.managecoach.render(coaches, coachDetail));
+    }
+
+    public Result postManageCoach()
+    {
+        return redirect("/draftcoach");
     }
 }

@@ -3,13 +3,17 @@
 # ~~~~
 
 GET     /                               controllers.OwnerController.getStart
+GET     /login                          controllers.OwnerController.getLoginChoice
 GET     /newowner                       controllers.OwnerController.getNewOwner
 POST    /newowner                       controllers.OwnerController.postNewOwner
+GET     /returnowner                    controllers.OwnerController.getReturnOwner
 
 GET     /addcoach                       controllers.CoachController.getAddCoach
 POST    /addcoach                       controllers.CoachController.postAddCoach
 GET     /draftcoach                     controllers.CoachController.getDraftCoach
 POST    /draftcoach                     controllers.CoachController.postDraftCoach
+GET     /managecoach                    controllers.CoachController.getManageCoach
+POST    /managecoach                    controllers.CoachController.postManageCoach
 
 GET     /coachpicture/:coachId          controllers.CoachController.getCoachPicture(coachId:Integer)
 
