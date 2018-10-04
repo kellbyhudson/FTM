@@ -1,6 +1,7 @@
 package controllers;
 
 import com.google.common.io.Files;
+import models.OrganizationDetail;
 import models.TakeOverOrganization;
 import play.Logger;
 import play.data.DynamicForm;
@@ -14,6 +15,7 @@ import play.mvc.Result;
 import javax.inject.Inject;
 import java.io.File;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrganizationController extends Controller
@@ -84,7 +86,18 @@ public class OrganizationController extends Controller
         String takeOverOrganizationSQL = "SELECT t FROM TakeOverOrganization t ORDER BY TakeOverOrganizationName";
         List<TakeOverOrganization> takeOverOrganizations = jpaApi.em().createQuery(takeOverOrganizationSQL, TakeOverOrganization.class).getResultList();
 
-        return ok(views.html.draftorganization.render(takeOverOrganizations));
+        List<OrganizationDetail> organizationDetailsList = new ArrayList<>();
+
+        for(TakeOverOrganization takeOverOrganization : takeOverOrganizations)
+        {
+            OrganizationDetail organizationDetail = new OrganizationDetail();
+            organizationDetail.setTakeOverOrganizationId(takeOverOrganization.getTakeOverOrganizationId());
+            organizationDetail.setTakeOverOrganizationName(takeOverOrganization.getTakeOverOrganizationName());
+            organizationDetail.setOrganizationSalaryCap(takeOverOrganization.getOrganizationSalaryCap());
+            organizationDetail.setPicture(takeOverOrganization.getPicture());
+            organizationDetailsList.add(organizationDetail);
+        }
+        return ok(views.html.draftorganization.render(organizationDetailsList));
     }
 
     public Result postDraftOrganization()

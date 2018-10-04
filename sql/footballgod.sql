@@ -27,6 +27,7 @@ CREATE TABLE Coach (
 CREATE TABLE PlayerPosition (
                 PlayerPositionId INT AUTO_INCREMENT NOT NULL,
                 PlayerPositionName VARCHAR(30) NOT NULL,
+                UnitId INT NOT NULL,
                 PRIMARY KEY (PlayerPositionId)
 );
 

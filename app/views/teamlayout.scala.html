@@ -1,0 +1,244 @@
+@(teamUnitSalary : ChartValues, pieSalary : ChartValues, coach : Coach, teamLayout : TeamLayout)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Team Depth Chart</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
+    <script src="/assets/lib/jquery/jquery.min.js"></script>
+    <script src="/assets/lib/popper.js/umd/popper.min.js"></script>
+    <script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/lib/chart.js/dist/Chart.bundle.js"></script>
+</head>
+<body>
+<script src="/assets/javascripts/popover.js">
+</script>
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary" style="margin:24px 0;">
+    <a class="navbar-brand" href="/login">
+        <img src="/assets/images/tmlogo.png" data-toggle="tooltip" title="Home" height="50">
+    </a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navb">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link text-light" href="/draftteam">Manage Roster</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" href="/">Logout</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <a class="btn btn-success my-2 my-sm-0" href="/searchteams">Search Teams Database</a>
+        </form>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-9">
+            <h2 class="text-center">Salary Breakdown by Position</h2>
+            <div id="canvas-holder" style="width:100%">
+                <canvas id="chart-teamunit" height="400" width="1400"></canvas>
+            </div>
+            <script src="/assets/javascripts/teamunitchart.js" id="script-teamunit"
+                    data-values="@teamUnitSalary.getData"
+                    data-labels="@teamUnitSalary.getLabels" data-colors="@teamUnitSalary.getColors"></script>
+        </div>
+        <div class="col-3">
+            <h2 class="text-center">Salary By Units</h2>
+            <div id="canvas-holder" style="width:100%">
+                <canvas id="chart-breakdown" height="50" width="50"></canvas>
+            </div>
+            <script src="/assets/javascripts/breakdownchart.js" id="script-breakdown"
+                    data-values="@pieSalary.getData"
+                    data-labels="@pieSalary.getLabels" data-colors="@pieSalary.getColors"></script>
+        </div>
+    </div>
+    <div class="row">
+        <h1 class="mx-auto">Team Depth Chart Layout</h1>
+    </div>
+    <div class="row">
+        <h6 class="mx-auto">(Click Icons for Position Players)</h6>
+    </div>
+    <div class="row">
+        <h5>Head Coach: @coach.getCoachName</h5>
+    </div>
+    <div class="bg-success">
+        <div class="row">
+            <div class="col-5">
+            </div>
+            <div class="col-1">
+                <img src="/assets/images/position.png" height="50" data-toggle="popover"
+                     title="Safety: @teamLayout.getSafety1.getName "
+                     data-content="@teamLayout.getSafety3.getName">
+            </div>
+            <div class="col-1">
+            </div>
+            <div class="col-1">
+                <img src="/assets/images/position.png" height="50" data-toggle="popover"
+                     title="Safety: @teamLayout.getSafety2.getName"
+                     data-content=" @teamLayout.getSafety4.getName">
+            </div>
+        </div>
+        <hr class="bg-light">
+        <div class="row">
+            <h1></h1><br>
+        </div>
+        <hr class="bg-light">
+        <div class="row">
+            <div class="col-6">
+            </div>
+            <div class="col-1">
+                <img src="/assets/images/position.png" height="50" data-toggle="popover"
+                     title="Insidelinebacker: @teamLayout.getInsideLinebacker.getName "
+                     data-content="@teamLayout.getInsideLinebacker2.getName @teamLayout.getInsideLinebacker3.getName">
+            </div>
+        </div>
+        <hr class="bg-light">
+        <div class="row">
+            <div class="col-4">
+            </div>
+            <div class="col-1">
+                <img src="/assets/images/position.png" height="50" data-toggle="popover"
+                     title="Outsidelinebacker: @teamLayout.getOutsideLinebacker1.getName"
+                     data-content="@teamLayout.getOutsideLinebacker3.getName">
+            </div>
+            <div class="col-3">
+            </div>
+            <div class="col-1">
+                <img src="/assets/images/position.png" height="50" data-toggle="popover"
+                     title="Outsidelinebacker: @teamLayout.getOutsideLinebacker2.getName"
+                     data-content="@teamLayout.getOutsideLinebacker4.getName">
+            </div>
+        </div>
+        <hr class="bg-light">
+        <div class="row">
+            <div class="col-1 text-right">
+                <img src="/assets/images/position.png" height="50" data-toggle="popover"
+                     title="Cornerback: @teamLayout.getCornerback1.getName"
+                     data-content="@teamLayout.getCornerback3.getName">
+            </div>
+            <div class="col-3">
+            </div>
+            <div class="col-1 text-right">
+                <img src="/assets/images/position.png" height="50" data-toggle="popover"
+                     title="Defensive End: @teamLayout.getDefensiveEnd1.getName"
+                     data-content="@teamLayout.getDefensiveEnd3.getName @teamLayout.getDefensiveEnd5.getName">
+            </div>
+            <div class="col-1 text-right">
+                <img src="/assets/images/position.png" height="50" data-toggle="popover"
+                     title="Defensive Tackle: @teamLayout.getDefensiveTackle1.getName"
+                     data-content="@teamLayout.getDefensiveTackle3.getName">
+            </div>
+            <div class="col-1 text-right">
+                <img src="/assets/images/position.png" height="50" data-toggle="popover"
+                     title="Defensive Tackle: @teamLayout.getDefensiveTackle2.getName"
+                     data-content="@teamLayout.getDefensiveTackle4.getName @teamLayout.getDefensiveTackle5.getName">
+            </div>
+            <div class="col-1 text-right">
+                <img src="/assets/images/position.png" height="50" data-toggle="popover"
+                     title="Defensive End: @teamLayout.getDefensiveEnd2.getName"
+                     data-content="@teamLayout.getDefensiveEnd4.getName">
+            </div>
+            <div class="col-3">
+            </div>
+            <div class="col-1">
+                <img src="/assets/images/position.png" height="50" data-toggle="popover"
+                     title="Cornerback: @teamLayout.getCornerback2.getName"
+                     data-content="@teamLayout.getCornerback4.getName">
+            </div>
+
+        </div>
+        <hr class="bg-light">
+        <div class="row">
+            <div class="col-1">
+                <img src="/assets/images/position.png" height="50" data-toggle="popover"
+                     title="Wide Receiver: @teamLayout.getWideReceiver1.getName"
+                     data-content="@teamLayout.getWideReceiver4.getName">
+            </div>
+            <div class="col-3">
+            </div>
+            <div class="col-1 text-left">
+                <img src="/assets/images/position.png" height="50" data-toggle="popover"
+                     title="Left Tackle: @teamLayout.getTackle1.getName"
+                     data-content="@teamLayout.getTackle3.getName">
+            </div>
+            <div class="col-1 text-left">
+                <img src="/assets/images/position.png" height="50" data-toggle="popover"
+                     title="Guard: @teamLayout.getGuard2.getName"
+                     data-content="@teamLayout.getGuard3.getName">
+            </div>
+            <div class="col-1 text-left">
+                <img src="/assets/images/position.png" height="50" data-toggle="popover"
+                     title="Center: @teamLayout.getCenter.getName"
+                     data-content="@teamLayout.getCenter2.getName">
+            </div>
+            <div class="col-1 text-left">
+                <img src="/assets/images/position.png" height="50" data-toggle="popover"
+                     title="Guard: @teamLayout.getGuard1.getName"
+                     data-content="@teamLayout.getGuard4.getName">
+            </div>
+            <div class="col-1 text-left">
+                <img src="/assets/images/position.png" height="50" data-toggle="popover"
+                     title="Right Tackle: @teamLayout.getTackle2.getName"
+                     data-content="@teamLayout.getTackle4.getName">
+            </div>
+            <div class="col-1 text-left">
+                <img src="/assets/images/position.png" height="50" data-toggle="popover"
+                     title="Tight End: @teamLayout.getTightEnd.getName"
+                     data-content="@teamLayout.getTightEnd2.getName">
+            </div>
+            <div class="col-1">
+            </div>
+            <div class="col-1 text-right">
+                <img src="/assets/images/position.png" height="50" data-toggle="popover"
+                     title="Wide Receiver: @teamLayout.getWideReceiver2.getName"
+                     data-content="@teamLayout.getWideReceiver5.getName">
+            </div>
+
+        </div>
+        <hr class="bg-light">
+        <div class="row">
+            <div class="col-2">
+            </div>
+            <div class="col-1 text-left">
+                <img src="/assets/images/position.png" height="50" data-toggle="popover"
+                     title="Wide Receiver: @teamLayout.getWideReceiver3.getName"
+                     data-content="@teamLayout.getWideReceiver6.getName">
+            </div>
+        </div>
+        <hr class="bg-light">
+        <div class="row">
+            <div class="col-7">
+            </div>
+            <div class="col-1 text-left">
+                <img src="/assets/images/position.png" height="50" data-toggle="popover"
+                     title="Running Back: @teamLayout.getRunningBack.getName"
+                     data-content="@teamLayout.getRunningBack2.getName @teamLayout.getRunningBack3.getName">
+            </div>
+        </div>
+        <hr class="bg-light">
+        <div class="row">
+            <div class="col-6">
+            </div>
+            <div class="col-1">
+                <img src="/assets/images/position.png" height="50" data-toggle="popover"
+                     title="Quarterback: @teamLayout.getQuarterback.getName"
+                     data-content="@teamLayout.getQuarterback2.getName @teamLayout.getQuarterback3.getName">
+            </div>
+        </div>
+        <hr class="bg-light">
+    </div>
+    <p><u><b>Special Teams</b></u></p>
+    <p>Kicker: @teamLayout.getKicker.getName</p>
+    <p>Punter: @teamLayout.getPunter.getName</p>
+    <p>Holder: @teamLayout.getHolder.getName</p>
+    <p>Long Snapper: @teamLayout.getLongSnapper.getName</p>
+
+</div>
+</body>
+</html>

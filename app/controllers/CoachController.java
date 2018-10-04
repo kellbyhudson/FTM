@@ -15,6 +15,7 @@ import play.mvc.Result;
 
 import javax.inject.Inject;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CoachController extends Controller
@@ -88,8 +89,21 @@ public class CoachController extends Controller
         String coachSQL = "SELECT c FROM Coach c ORDER BY CoachName";
         List<Coach> coaches = jpaApi.em().createQuery(coachSQL, Coach.class).getResultList();
 
+        List<CoachDetail> coachDetailList = new ArrayList<>();
 
-        return ok(views.html.draftcoach.render(coaches));
+        for(Coach coach : coaches)
+        {
+            CoachDetail coachDetail = new CoachDetail();
+            coachDetail.setCoachId(coach.getCoachId());
+            coachDetail.setCoachName(coach.getCoachName());
+            coachDetail.setCoachTier(coach.getCoachTier());
+            coachDetail.setCoachValue(coach.getCoachValue());
+            coachDetail.setCoachSpecialtyId(coach.getCoachSpecialtyId());
+            coachDetail.setCoachPicture(coach.getCoachPicture());
+            coachDetailList.add(coachDetail);
+        }
+
+        return ok(views.html.draftcoach.render(coachDetailList));
     }
 
     @Transactional

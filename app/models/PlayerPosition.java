@@ -11,6 +11,7 @@ public class PlayerPosition
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)private Integer playerPositionId;
     private String playerPositionName;
+    private Integer unitId;
 
     public String getPlayerPositionName()
     {

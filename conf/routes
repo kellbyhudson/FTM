@@ -32,6 +32,11 @@ POST    /draftteam                      controllers.TeamController.postDraftTeam
 GET     /draftplayer/:sortOrderId       controllers.TeamController.getDraftPlayer(sortOrderId:Integer)
 POST    /draftplayer/:sortOrderId       controllers.TeamController.postDraftPlayer(sortOrderId:Integer)
 
+GET     /teamlayout/:teamId             controllers.TeamController.getTeamLayout(teamId:Integer)
+POST    /teamlayout/:teamId             controllers.TeamController.postTeamLayout(teamId:Integer)
+
+GET     /searchteams                    controllers.TeamController.getSearchTeams
+
 GET     /importplayer                   controllers.ImportController.importPlayer
 
 

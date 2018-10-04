@@ -1,4 +1,4 @@
-@(coaches : List[Coach])
+@(coaches : List[CoachDetail])
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +11,9 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-secondary" style="margin:24px 0;">
-    <a class="navbar-brand" href="/login">Home</a>
+    <a class="navbar-brand" href="/login">
+        <img src="/assets/images/tmlogo.png" data-toggle="tooltip" title="Home" height="50">
+    </a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -26,8 +28,7 @@
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button class="btn btn-success my-2 my-sm-0" type="button">Search</button>
+            <a class="btn btn-success my-2 my-sm-0" href="/searchteams">Search Teams Database</a>
         </form>
     </div>
 </nav>
@@ -40,16 +41,22 @@
                 <br><br>
                 <div class="row">
                     @for(coach <- coaches){
-
-                    <div class="card" style="width:20rem;margin:20px 0 24px 0">
-                        <img class="card-img-top" src="/coachpicture/@coach.getCoachId" alt="image" style="width:100%">
-                        <div class="card-body">
-                            <h4 class="card-title">@coach.getCoachName</h4>
-                            <p class="card-text">Salary: $ @coach.getCoachValue</p>
-                            <p class="card-text">Coach Tier: @coach.getCoachTier</p>
-                            <button class="btn btn-primary" value="@coach.getCoachId" name="Id" id="Id">SELECT</button>
+                    <div class="col-2">
+                        <div class="card" style="width:20rem;margin:20px 0 24px 0">
+                            <div class="card-body">
+                                <button class="btn btn-primary" name="Id" id="Id" value="@coach.getCoachId"><h4
+                                        class="card-title">@coach.getCoachName</h4>
+                                </button>
+                                <br>
+                                <h1></h1><br>
+                                <p class="card-text">Salary: @coach.getFormattedCoachSalary</p>
+                                <p class="card-text">Coach Tier: @coach.getCoachTier</p>
+                            </div>
+                            <img class="card-img-bottom" src="/coachpicture/@coach.getCoachId" alt="image"
+                                 style="width:100%">
                         </div>
                     </div>
+
                     }
 
                 </div>
