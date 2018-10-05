@@ -6,26 +6,32 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/stylesheets/login.css">
+
     <script src="/assets/lib/jquery/jquery.min.js"></script>
     <script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-secondary" style="margin:24px 0;">
-    <a class="navbar-brand" href="/newowner">
-        <img src="/assets/images/tmlogo.png" data-toggle="tooltip" title="Home" height="50">
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary" >
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;
+    <a class="navbar-brand" href="/login">
+        <img src="/assets/images/ftm.jpg" data-toggle="tooltip" title="Home" height="50">
     </a>
+    </span>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">About</a>
+        <a class="nav-link" href="/managecoach">Manage Coach</a>
+        <a class="nav-link" href="/draftteam">Back</a>
+        <a class="nav-link" href="/">Logout</a>
+    </div>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navb">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link text-light" href="/draftteam">Back</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-light" href="/">Logout</a>
-            </li>
+
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <a class="btn btn-success my-2 my-sm-0" href="/searchteams">Search Teams Database</a>
@@ -36,7 +42,7 @@
     <p class="display-2">Draft A @playerPosition.getPlayerPositionName</p>
     <div class="row">
         <form action="" method="GET">
-            <label for="searchname">Name: </label>
+            <label for="searchname">Search: </label>
             <input id="searchname" type="search" name="searchname" placeholder="Enter Name" value="@searchName">
 
             <label for="college">College: </label>
@@ -52,7 +58,9 @@
             </SELECT>
             <input type="submit" value="Search">
 
-            <button class="btn btn-outline-info" id="searchMinValue" name="searchMinValue" value="Minimum Salary">Minimum Salary</button>
+            <button class="btn btn-outline-info" id="searchMinValue" name="searchMinValue" value="Minimum Salary">
+                Minimum Salary
+            </button>
         </form>
     </div>
     <div class="row">
@@ -63,14 +71,15 @@
                 <div class="row">
                     @for(player <- playerDetails){
                     <div class="card" style="width:20rem;margin:20px 0 24px 0">
-                        <div class="card-body">
+                        <div class="card-body mySource">
                             <h4 class="card-title">@player.getPlayerName</h4>
                             <p class="card-text">Salary: @player.getFormattedPlayerValue</p>
                             <p class="card-text">Height: @player.getPlayerHeightFeet' @player.getPlayerHeightInches"</p>
                             <p class="card-text">Weight: @player.getPlayerWeight</p>
                             <p class="card-text">Years Pro: @player.getYearsExperience</p>
                             <p class="card-text">College: @player.getPlayerCollege</p>
-                            <button class="btn btn-primary" value="@player.getPlayerId" name="Id" id="Id">SELECT</button>
+                            <button class="btn btn-success" value="@player.getPlayerId" name="Id" id="Id">SELECT
+                            </button>
                         </div>
                     </div>
 
@@ -79,6 +88,10 @@
             </form>
         </div>
     </div>
+
+    <script src="/assets/javascripts/searchplayer.js"></script>
+    <script src="/assets/javascripts/login.js"></script>
+
 
 </div>
 </body>

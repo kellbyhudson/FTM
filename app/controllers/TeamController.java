@@ -703,6 +703,28 @@ public class TeamController extends Controller
                     punters.add(punter1);
                 }
 
+                List<TeamPlayer> holderlist = jpaApi.em().createQuery(playerSQL, TeamPlayer.class).setParameter("teamId", teamId).setParameter("teamPlayerPositionId", 16).getResultList();
+
+                List<Holder> holders = new ArrayList<>();
+                for (TeamPlayer holder : holderlist)
+                {
+                    Holder holder1 = new Holder();
+                    holder1.setName(holder.getTeamPlayerName());
+                    holder1.setValue(holder.getTeamPlayerValue());
+                    holders.add(holder1);
+                }
+
+                List<TeamPlayer> longsnapperlist = jpaApi.em().createQuery(playerSQL, TeamPlayer.class).setParameter("teamId", teamId).setParameter("teamPlayerPositionId", 17).getResultList();
+
+                List<LongSnapper> longsnappers = new ArrayList<>();
+                for (TeamPlayer longsnapper : longsnapperlist)
+                {
+                    LongSnapper longSnapper1 = new LongSnapper();
+                    longSnapper1.setName(longsnapper.getTeamPlayerName());
+                    longSnapper1.setValue(longsnapper.getTeamPlayerValue());
+                    longsnappers.add(longSnapper1);
+                }
+
                 Quarterback quarterback = quarterbacks.get(0);
                 Quarterback quarterback2 = quarterbacks.get(1);
                 Quarterback quarterback3 = quarterbacks.get(2);
@@ -768,8 +790,8 @@ public class TeamController extends Controller
                 Kicker kicker = kickers.get(0);
                 Punter punter = punters.get(0);
 
-                Quarterback holder = quarterbacks.get(3);
-                Center longSnapper = centers.get(2);
+                Holder holder = holders.get(0);
+                LongSnapper longSnapper = longsnappers.get(0);
 
 
                 String sql = "SELECT t FROM Team t WHERE teamId = :teamId ";
@@ -965,7 +987,7 @@ public class TeamController extends Controller
     {
         int playerPositionId = sortOrderId;
         //QB
-        if (sortOrderId == 25 || sortOrderId == 26 || sortOrderId == 52)
+        if (sortOrderId == 25 || sortOrderId == 26 )
         {
             playerPositionId = 1;
         }
@@ -995,7 +1017,7 @@ public class TeamController extends Controller
             playerPositionId = 6;
         }
         //C
-        if (sortOrderId == 11 || sortOrderId == 37 || sortOrderId == 53)
+        if (sortOrderId == 11 || sortOrderId == 37 )
         {
             playerPositionId = 7;
         }
@@ -1038,6 +1060,17 @@ public class TeamController extends Controller
         if (sortOrderId == 24)
         {
             playerPositionId = 14;
+        }
+
+        //H
+        if (sortOrderId == 52)
+        {
+            playerPositionId = 16;
+        }
+        //LS
+        if (sortOrderId == 53)
+        {
+            playerPositionId = 17;
         }
 
         DynamicForm form = formFactory.form().bindFromRequest();
@@ -1085,11 +1118,11 @@ public class TeamController extends Controller
         Integer teamId = intTeamId;
 
         String sql = "SELECT NEW models.TeamUnitCount(tp.teamPlayerPositionId, pp.playerPositionName, SUM(tp.teamPlayerValue) AS SalaryOfPosition) " +
-                "FROM TeamPlayer tp JOIN Player p ON tp.playerId = p.playerId " +
-                "JOIN PlayerPosition pp ON pp.playerPositionId = p.playerPositionId " +
+                "FROM TeamPlayer tp JOIN PlayerPosition pp ON pp.playerPositionId = tp.teamPlayerPositionId " +
+                "WHERE tp.teamId = :teamId " +
                 "GROUP BY tp.teamPlayerPositionId, pp.playerPositionName ";
 
-        List<TeamUnitCount> teamUnitCounts = jpaApi.em().createQuery(sql, TeamUnitCount.class).getResultList();
+        List<TeamUnitCount> teamUnitCounts = jpaApi.em().createQuery(sql, TeamUnitCount.class).setParameter("teamId", teamId).getResultList();
 
         ChartValues chartValues = new ChartValues();
 
@@ -1101,12 +1134,13 @@ public class TeamController extends Controller
         chartValues.setLabels(labels);
         chartValues.setColors(colors);
 
-        sql = "SELECT NEW models.TeamUnitCount(pp.unitId, cs.coachSpecialtyName, SUM(tp.teamPlayerValue) AS SalaryOfUnit) " +
+        sql = "SELECT NEW models.TeamUnitCount2(pp.unitId, cs.coachSpecialtyName, SUM(tp.teamPlayerValue) AS SalaryOfUnit) " +
                 "FROM TeamPlayer tp JOIN PlayerPosition pp ON pp.playerPositionId = tp.teamPlayerPositionId " +
                 "JOIN CoachSpecialty cs ON cs.coachSpecialtyId = pp.unitId " +
+                "WHERE tp.teamId = :teamId " +
                 "GROUP BY pp.unitId ";
 
-        List<TeamUnitCount> teamUnitCountList = jpaApi.em().createQuery(sql, TeamUnitCount.class).getResultList();
+        List<TeamUnitCount2> teamUnitCountList = jpaApi.em().createQuery(sql, TeamUnitCount2.class).setParameter("teamId" , teamId).getResultList();
 
         ChartValues pieValues = new ChartValues();
 
@@ -1294,6 +1328,29 @@ public class TeamController extends Controller
             punters.add(punter1);
         }
 
+        List<TeamPlayer> holderlist = jpaApi.em().createQuery(playerSQL, TeamPlayer.class).setParameter("teamId", teamId).setParameter("teamPlayerPositionId", 16).getResultList();
+
+
+        List<Holder> holders = new ArrayList<>();
+        for (TeamPlayer holder : holderlist)
+        {
+            Holder holder1 = new Holder();
+            holder1.setName(holder.getTeamPlayerName());
+            holder1.setValue(holder.getTeamPlayerValue());
+            holders.add(holder1);
+        }
+
+        List<TeamPlayer> longsnapperlist = jpaApi.em().createQuery(playerSQL, TeamPlayer.class).setParameter("teamId", teamId).setParameter("teamPlayerPositionId", 17).getResultList();
+
+        List<LongSnapper> longsnappers = new ArrayList<>();
+        for (TeamPlayer longsnapper : longsnapperlist)
+        {
+            LongSnapper longSnapper1 = new LongSnapper();
+            longSnapper1.setName(longsnapper.getTeamPlayerName());
+            longSnapper1.setValue(longsnapper.getTeamPlayerValue());
+            longsnappers.add(longSnapper1);
+        }
+
         Quarterback quarterback = quarterbacks.get(0);
         Quarterback quarterback2 = quarterbacks.get(1);
         Quarterback quarterback3 = quarterbacks.get(2);
@@ -1359,8 +1416,8 @@ public class TeamController extends Controller
         Kicker kicker = kickers.get(0);
         Punter punter = punters.get(0);
 
-        Quarterback holder = quarterbacks.get(3);
-        Center longSnapper = centers.get(2);
+        Holder holder = holders.get(0);
+        LongSnapper longSnapper = longsnappers.get(0);
 
 
         TeamLayout teamLayout = new TeamLayout(quarterback, quarterback2, quarterback3, runningBack, runningBack2, runningBack3, wideReceiver1, wideReceiver2, wideReceiver3, wideReceiver4, wideReceiver5, wideReceiver6, tightEnd, tightEnd2, tackle1, tackle2, tackle3, tackle4, guard1, guard2, guard3, guard4, center, center2, defensiveTackle1, defensiveTackle2, defensiveTackle3, defensiveTackle4, defensiveTackle5, defensiveEnd1, defensiveEnd2, defensiveEnd3, defensiveEnd4, defensiveEnd5, outsideLinebacker1, outsideLinebacker2, outsideLinebacker3, outsideLinebacker4, insideLinebacker, insideLinebacker2, insideLinebacker3, safety1, safety2, safety3, safety4, cornerback1, cornerback2, cornerback3, cornerback4, punter, kicker, holder, longSnapper);
@@ -1386,7 +1443,7 @@ public class TeamController extends Controller
 
 
         String sql = "SELECT NEW models.TeamTable(t.teamId, t.teamCity, t.teamName, o.ownerName, too.organizationSalaryCap, t.teamSalary, c.coachValue) " +
-                "FROM Team t JOIN Owner o ON t.ownerId = t.ownerId " +
+                "FROM Team t JOIN Owner o ON t.ownerId = o.ownerId " +
                 "JOIN Coach c ON c.coachId = t.coachId " +
                 "JOIN TakeOverOrganization too ON too.takeOverOrganizationId = t.takeOverOrganizationId " +
                 "GROUP BY t.teamId " +

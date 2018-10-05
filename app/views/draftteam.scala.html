@@ -6,26 +6,32 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/stylesheets/salarycap.css">
+    <link rel="stylesheet" href="/assets/stylesheets/login.css">
+
     <script src="/assets/lib/jquery/jquery.min.js"></script>
     <script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-secondary" style="margin:24px 0;">
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary" >
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;
     <a class="navbar-brand" href="/login">
-        <img src="/assets/images/tmlogo.png" data-toggle="tooltip" title="Home" height="50">
+        <img src="/assets/images/ftm.jpg" data-toggle="tooltip" title="Home" height="50">
     </a>
+    </span>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">About</a>
+        <a class="nav-link" href="/managecoach">Manage Coach</a>
+        <a class="nav-link" href="/">Logout</a>
+    </div>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navb">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link text-light" href="/managecoach">Manage Coach</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-light" href="/">Logout</a>
-            </li>
+
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <a class="btn btn-success my-2 my-sm-0" href="/searchteams">Search Teams Database</a>
@@ -47,7 +53,7 @@
                 <div class="col-12">
                     @helper.CSRF.formField
                     <label for="1"><a href="/draftplayer/1"
-                                                class="btn btn-outline-dark">Quarterback: </a></label>
+                                      class="btn btn-outline-dark">Quarterback: </a></label>
                     <input type="text" name="quarterback" id="1" value="@teamDisplay.getQuarterback.getName"
                            disabled="disabled"
                            pattern="[A-Za-z]{1,50}" title="You must draft a player for this position">
@@ -173,30 +179,34 @@
         <div class="col-2">
             <div class="col-12">
                 <div class="row">
-                    <div class="card">
-                        <div class="card-header bg-light">
+                    <div class="sidenav2">
+                        <div class="card">
+                            <div class="card-header bg-light">
 
-                            <h4 class="card-title">@teamDetail.getTeamName</h4>
-                            <b>Salary Cap:</b>
-                            <p> @teamDetail.getFormattedOrganizationSalaryCap</p>
-                        </div>
-                        <div class="card-body">
+                                <h4 class="card-title">@teamDetail.getTeamName</h4>
+                                <b>Salary Cap:</b>
+                                <p> @teamDetail.getFormattedOrganizationSalaryCap</p>
+                            </div>
+                            <div class="card-body">
 
-                            <p>- @teamDetail.getFormattedTeamSalaryAccrued</p>
+                                <p>- @teamDetail.getFormattedTeamSalaryAccrued</p>
 
+                            </div>
+                            <div class="card-footer bg-light">
+                                <b>Balance:</b>
+                                <p>@teamDetail.getFormattedTeamSalaryBalance</p>
+                            </div>
                         </div>
-                        <div class="card-footer bg-light">
-                            <b>Balance:</b>
-                            <p>@teamDetail.getFormattedTeamSalaryBalance</p>
-                        </div>
+                        <form method="POST">
+                            @helper.CSRF.formField
+                            <br><input class="btn btn-success" type="submit" value="Save & View Team Layout">
+                        </form>
                     </div>
+
+
+
                 </div>
-                <div class="row">
-                    <form method="POST">
-                        @helper.CSRF.formField
-                        <br><input class="btn btn-success" type="submit" value="Save & View Team Layout">
-                    </form>
-                </div>
+
             </div>
         </div>
     </div>
@@ -244,22 +254,28 @@
 
         </div>
         <div class="col-5">
-            <br><label for="41"><a href="/draftplayer/41" class="btn btn-outline-dark">Backup Defensive End: </a></label>
+            <br><label for="41"><a href="/draftplayer/41" class="btn btn-outline-dark">Backup Defensive
+            End: </a></label>
             <input type="text" name="defensiveend3" id="41" value="@teamDisplay.getDefensiveEnd3.getName"
                    disabled="disabled">
-            <br><label for="42"><a href="/draftplayer/42" class="btn btn-outline-dark">Backup Defensive End: </a></label>
+            <br><label for="42"><a href="/draftplayer/42" class="btn btn-outline-dark">Backup Defensive
+            End: </a></label>
             <input type="text" name="defensiveend4" id="42" value="@teamDisplay.getDefensiveEnd4.getName"
                    disabled="disabled">
-            <br><label for="43"><a href="/draftplayer/43" class="btn btn-outline-dark">Backup Defensive End: </a></label>
+            <br><label for="43"><a href="/draftplayer/43" class="btn btn-outline-dark">Backup Defensive
+            End: </a></label>
             <input type="text" name="defensiveend5" id="43" value="@teamDisplay.getDefensiveEnd5.getName"
                    disabled="disabled">
-            <br><label for="38"><a href="/draftplayer/38" class="btn btn-outline-dark">Backup Defensive Tackle: </a></label>
+            <br><label for="38"><a href="/draftplayer/38" class="btn btn-outline-dark">Backup Defensive
+            Tackle: </a></label>
             <input type="text" name="defensivetackle3" id="38" value="@teamDisplay.getDefensiveTackle3.getName"
                    disabled="disabled">
-            <br><label for="39"><a href="/draftplayer/39" class="btn btn-outline-dark">Backup Defensive Tackle: </a></label>
+            <br><label for="39"><a href="/draftplayer/39" class="btn btn-outline-dark">Backup Defensive
+            Tackle: </a></label>
             <input type="text" name="defensivetackle4" id="39" value="@teamDisplay.getDefensiveTackle4.getName"
                    disabled="disabled">
-            <br><label for="40"><a href="/draftplayer/40" class="btn btn-outline-dark">Backup Defensive Tackle: </a></label>
+            <br><label for="40"><a href="/draftplayer/40" class="btn btn-outline-dark">Backup Defensive
+            Tackle: </a></label>
             <input type="text" name="defensivetackle5" id="40" value="@teamDisplay.getDefensiveTackle5.getName"
                    disabled="disabled">
             <br><label for="44"><a href="/draftplayer/44" class="btn btn-outline-dark">Backup Linebacker: </a></label>
@@ -296,5 +312,7 @@
         </div>
     </div>
 </div>
+<script src="/assets/javascripts/login.js"></script>
+
 </body>
 </html>

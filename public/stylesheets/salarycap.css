@@ -1,0 +1,37 @@
+body {
+    font-family: "Lato", sans-serif;
+}
+
+.sidenav2 {
+    width: 215px;
+    position: fixed;
+    z-index: 1;
+    top: 100px;
+    right: 80px;
+    background: #eee;
+    overflow-x: hidden;
+    padding: 8px 0;
+}
+
+.sidenav2 a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #2196F3;
+    display: block;
+}
+
+.sidenav2 a:hover {
+    color: #064579;
+}
+
+.main {
+    margin-right: 160px; /* Same width as the sidebar + left position in px */
+    font-size: 28px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav2 {padding-top: 15px;}
+    .sidenav2 a {font-size: 18px;}
+}

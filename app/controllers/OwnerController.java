@@ -85,4 +85,14 @@ public class OwnerController extends Controller
     {
         return ok(views.html.returningownerlogin.render());
     }
+
+    public Result getTestLogin()
+    {
+        return ok(views.html.testlogin.render());
+    }
+
+    public Result getTestPage()
+    {
+        return ok(views.html.testpage.render());
+    }
 }

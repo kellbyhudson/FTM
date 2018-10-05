@@ -67,11 +67,11 @@ public class TeamLayout
     private Punter punter;
     private Kicker kicker;
 
-    private Quarterback holder;
+    private Holder holder;
 
-    private Center longSnapper;
+    private LongSnapper longSnapper;
 
-    public TeamLayout(Quarterback quarterback, Quarterback quarterback2, Quarterback quarterback3, RunningBack runningBack, RunningBack runningBack2, RunningBack runningBack3, WideReceiver1 wideReceiver1, WideReceiver1 wideReceiver2, WideReceiver1 wideReceiver3, WideReceiver1 wideReceiver4, WideReceiver1 wideReceiver5, WideReceiver1 wideReceiver6, TightEnd tightEnd, TightEnd tightEnd2, Tackle1 tackle1, Tackle1 tackle2, Tackle1 tackle3, Tackle1 tackle4, Guard1 guard1, Guard1 guard2, Guard1 guard3, Guard1 guard4, Center center, Center center2, DefensiveTackle1 defensiveTackle1, DefensiveTackle1 defensiveTackle2, DefensiveTackle1 defensiveTackle3, DefensiveTackle1 defensiveTackle4, DefensiveTackle1 defensiveTackle5, DefensiveEnd1 defensiveEnd1, DefensiveEnd1 defensiveEnd2, DefensiveEnd1 defensiveEnd3, DefensiveEnd1 defensiveEnd4, DefensiveEnd1 defensiveEnd5, OutsideLinebacker1 outsideLinebacker1, OutsideLinebacker1 outsideLinebacker2, OutsideLinebacker1 outsideLinebacker3, OutsideLinebacker1 outsideLinebacker4, InsideLinebacker insideLinebacker, InsideLinebacker insideLinebacker2, InsideLinebacker insideLinebacker3, Safety1 safety1, Safety1 safety2, Safety1 safety3, Safety1 safety4, Cornerback1 cornerback1, Cornerback1 cornerback2, Cornerback1 cornerback3, Cornerback1 cornerback4, Punter punter, Kicker kicker, Quarterback holder, Center longSnapper)
+    public TeamLayout(Quarterback quarterback, Quarterback quarterback2, Quarterback quarterback3, RunningBack runningBack, RunningBack runningBack2, RunningBack runningBack3, WideReceiver1 wideReceiver1, WideReceiver1 wideReceiver2, WideReceiver1 wideReceiver3, WideReceiver1 wideReceiver4, WideReceiver1 wideReceiver5, WideReceiver1 wideReceiver6, TightEnd tightEnd, TightEnd tightEnd2, Tackle1 tackle1, Tackle1 tackle2, Tackle1 tackle3, Tackle1 tackle4, Guard1 guard1, Guard1 guard2, Guard1 guard3, Guard1 guard4, Center center, Center center2, DefensiveTackle1 defensiveTackle1, DefensiveTackle1 defensiveTackle2, DefensiveTackle1 defensiveTackle3, DefensiveTackle1 defensiveTackle4, DefensiveTackle1 defensiveTackle5, DefensiveEnd1 defensiveEnd1, DefensiveEnd1 defensiveEnd2, DefensiveEnd1 defensiveEnd3, DefensiveEnd1 defensiveEnd4, DefensiveEnd1 defensiveEnd5, OutsideLinebacker1 outsideLinebacker1, OutsideLinebacker1 outsideLinebacker2, OutsideLinebacker1 outsideLinebacker3, OutsideLinebacker1 outsideLinebacker4, InsideLinebacker insideLinebacker, InsideLinebacker insideLinebacker2, InsideLinebacker insideLinebacker3, Safety1 safety1, Safety1 safety2, Safety1 safety3, Safety1 safety4, Cornerback1 cornerback1, Cornerback1 cornerback2, Cornerback1 cornerback3, Cornerback1 cornerback4, Punter punter, Kicker kicker, Holder holder, LongSnapper longSnapper)
     {
         this.quarterback = quarterback;
         this.quarterback2 = quarterback2;
@@ -638,22 +638,22 @@ public class TeamLayout
         this.kicker = kicker;
     }
 
-    public Quarterback getHolder()
+    public Holder getHolder()
     {
         return holder;
     }
 
-    public void setHolder(Quarterback holder)
+    public void setHolder(Holder holder)
     {
         this.holder = holder;
     }
 
-    public Center getLongSnapper()
+    public LongSnapper getLongSnapper()
     {
         return longSnapper;
     }
 
-    public void setLongSnapper(Center longSnapper)
+    public void setLongSnapper(LongSnapper longSnapper)
     {
         this.longSnapper = longSnapper;
     }

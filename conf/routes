@@ -39,8 +39,9 @@ GET     /searchteams                    controllers.TeamController.getSearchTeam
 
 GET     /importplayer                   controllers.ImportController.importPlayer
 
+GET     /testlogin                      controllers.OwnerController.getTestLogin
 
-
+GET     /testpage                       controllers.OwnerController.getTestPage
 
 
 
