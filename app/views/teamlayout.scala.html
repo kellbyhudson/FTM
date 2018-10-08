@@ -1,4 +1,4 @@
-@(teamUnitSalary : ChartValues, pieSalary : ChartValues, coach : Coach, teamLayout : TeamLayout)
+@(teamUnitSalary : ChartValues, pieSalary : ChartValues, coach : Coach, teamLayout : TeamLayout, teamId : TeamId)
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,8 +25,11 @@
     </span>
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a class="nav-link" href="/draftteam">Manage Roster</a>
-        <a class="nav-link" href="/managecoach">Manage Coach</a>
+        <a class="nav-link" href="/draftteam">Manage My Roster</a>
+        <a class="nav-link" href="/managecoach">Manage My Coach</a>
+        <a class="nav-link" href="/managethisteam/@teamId.getTeamId">Manage This Roster</a>
+        <a class="nav-link" href="/managethiscoach/@teamId.getTeamId">Manage This Coach</a>
+
         <a class="nav-link" href="/">Logout</a>
     </div>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">

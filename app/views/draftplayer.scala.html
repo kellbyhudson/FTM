@@ -7,12 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/stylesheets/login.css">
+    <link rel="stylesheet" href="/assets/stylesheets/button.css">
 
     <script src="/assets/lib/jquery/jquery.min.js"></script>
     <script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-secondary" >
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;
     <a class="navbar-brand" href="/login">
         <img src="/assets/images/ftm.jpg" data-toggle="tooltip" title="Home" height="50">
@@ -41,9 +42,9 @@
 <div class="container-fluid">
     <p class="display-2">Draft A @playerPosition.getPlayerPositionName</p>
     <div class="row">
-        <form action="" method="GET">
-            <label for="searchname">Search: </label>
-            <input id="searchname" type="search" name="searchname" placeholder="Enter Name" value="@searchName">
+        <form action="" method="GET" autocomplete="on">
+            <label for="myInput">Search: </label>
+            <input id="myInput" type="text" name="searchname" placeholder="Enter Name" value="@searchName">
 
             <label for="college">College: </label>
             <SELECT id="college" name="college">
@@ -78,7 +79,7 @@
                             <p class="card-text">Weight: @player.getPlayerWeight</p>
                             <p class="card-text">Years Pro: @player.getYearsExperience</p>
                             <p class="card-text">College: @player.getPlayerCollege</p>
-                            <button class="btn btn-success" value="@player.getPlayerId" name="Id" id="Id">SELECT
+                            <button class="button btn btn-success" value="@player.getPlayerId" name="Id" id="Id">SELECT
                             </button>
                         </div>
                     </div>

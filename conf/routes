@@ -15,6 +15,9 @@ POST    /draftcoach                     controllers.CoachController.postDraftCoa
 GET     /managecoach                    controllers.CoachController.getManageCoach
 POST    /managecoach                    controllers.CoachController.postManageCoach
 
+GET     /managethiscoach/:teamId        controllers.CoachController.getManageThisCoach(teamId:Integer)
+POST    /managethiscoach/:teamId        controllers.CoachController.postManageThisCoach(teamId:Integer)
+
 GET     /coachpicture/:coachId          controllers.CoachController.getCoachPicture(coachId:Integer)
 
 
@@ -29,6 +32,9 @@ GET     /setupteam                      controllers.TeamController.getSetupTeam
 POST    /setupteam                      controllers.TeamController.postSetupTeam
 GET     /draftteam                      controllers.TeamController.getDraftTeam
 POST    /draftteam                      controllers.TeamController.postDraftTeam
+
+GET     /managethisteam/:teamId         controllers.TeamController.getManageThisTeam(teamId:Integer)
+POST    /managethisteam/:teamId         controllers.TeamController.postManageThisTeam(teamId:Integer)
 GET     /draftplayer/:sortOrderId       controllers.TeamController.getDraftPlayer(sortOrderId:Integer)
 POST    /draftplayer/:sortOrderId       controllers.TeamController.postDraftPlayer(sortOrderId:Integer)
 

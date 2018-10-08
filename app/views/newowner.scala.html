@@ -37,10 +37,10 @@
         </form>
     </div>
 </nav>
+<p class="display-2">Welcome to the NFL</p>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-11">
-            <p class="display-2">Welcome to the NFL</p>
+        <div class="col-5">
             <form method="POST">
                 @helper.CSRF.formField
                 <fieldset>
@@ -49,15 +49,13 @@
                     <br><label for="organizationcity">Organization City: </label><input type="text" name="organizationcity" id="organizationcity" placeholder="Headquarter City" required="required">
                     <br><label for="ownerEmail">Owner's Email: </label><input type="email" name="ownerEmail" id="ownerEmail" placeholder="Email Address" required="required">
 
-                    <br><label for="password">Create Password: </label><input type="text" name="password" id="password" placeholder="Create Password" required="required">
-                    <br><label for="passwordretype">Retype Password: </label><input type="text" name="passwordretype" id="passwordretype" placeholder="Retype Password" required="required">
+                    <br><label for="password">Create Password: </label><input type="password" name="password" id="password" placeholder="Create Password" required="required">
+                    <br><label for="passwordretype">Retype Password: </label><input type="password" name="passwordretype" id="passwordretype" placeholder="Retype Password" required="required">
 
                     <br><input type="submit" value="Continue" >
                 </fieldset>
-
             </form>
-        </div>
-        <div class="col-1">
+            <br><br><br>
             <!-- Button to Open the Modal -->
             <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
                 Help
@@ -89,8 +87,14 @@
                 </div>
             </div>
         </div>
+        <div class="col-7">
+            <div id="map" style="width:100%;height:500px;"></div>
+        </div>
     </div>
 </div>
 <script src="/assets/javascripts/login.js"></script>
+<script src="/assets/javascripts/maps.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAm8PcxRwjIdWXLORcoIeH0hq-VwGF6N-g&callback=myMap"></script>
+
 </body>
 </html>

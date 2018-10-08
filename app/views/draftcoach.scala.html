@@ -56,6 +56,17 @@
                                     <button class="btn btn-success" name="Id" id="Id" value="@coach.getCoachId"><h6
                                             class="title">@coach.getCoachName</h6>
                                     </button>
+                                    @if(coach.getCoachTier == 5){
+
+                                    }else if(coach.getCoachTier == 4){
+
+                                    }else if(coach.getCoachTier == 3){
+
+                                    }else if(coach.getCoachTier == 2){
+
+                                    }else{
+
+                                    }
                                     <p>Salary: @coach.getFormattedCoachSalary</p>
                                 </div>
                             </div>

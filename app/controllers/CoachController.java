@@ -117,7 +117,7 @@ public class CoachController extends Controller
 
         String result = "";
 
-        String teamIdText = session().get("teamId");
+        String teamIdText = session().get("THISteamId");
 
         if (teamIdText == null)
         {
@@ -125,7 +125,7 @@ public class CoachController extends Controller
         }
         else
         {
-            Integer teamId = Integer.parseInt(session().get("teamId"));
+            Integer teamId = Integer.parseInt(session().get("THISteamId"));
 
             Logger.debug("teamId is " + teamId);
 
@@ -137,7 +137,21 @@ public class CoachController extends Controller
 
             jpaApi.em().persist(team);
 
-            result = "/draftteam";
+            try
+            {
+                if (session().get("THISteamId").equals(session().get("MYteamId")))
+                {
+                    result = "/draftteam";
+                }
+                else
+                {
+                    result = "/managethisteam/";
+                    result += teamIdText;
+                }
+            }catch (Exception e)
+            {
+                result = "/draftteam";
+            }
         }
 
         return redirect(result);
@@ -156,10 +170,14 @@ public class CoachController extends Controller
     @Transactional
     public Result getManageCoach()
     {
+        Logger.debug("teamId is " + session().get("MYteamId"));
+
         String coachSQL = "SELECT c FROM Coach c ORDER BY CoachName";
         List<Coach> coaches = jpaApi.em().createQuery(coachSQL, Coach.class).getResultList();
 
-        Integer teamId = Integer.parseInt(session().get("teamId"));
+        Integer teamId = Integer.parseInt(session().get("MYteamId"));
+
+        session().put("THISteamId", teamId.toString());
 
         String coachDetailSQL = "SELECT coachId FROM Team t WHERE teamId = :teamId ";
 
@@ -176,4 +194,30 @@ public class CoachController extends Controller
     {
         return redirect("/draftcoach");
     }
+
+    @Transactional
+    public Result getManageThisCoach(Integer teamId)
+    {
+        String coachSQL = "SELECT c FROM Coach c ORDER BY CoachName";
+        List<Coach> coaches = jpaApi.em().createQuery(coachSQL, Coach.class).getResultList();
+
+        session().put("THISteamId", teamId.toString());
+
+        String coachDetailSQL = "SELECT coachId FROM Team t WHERE teamId = :teamId ";
+
+        Integer coachId = jpaApi.em().createQuery(coachDetailSQL, Integer.class).setParameter("teamId", teamId).getSingleResult();
+
+        CoachDetail coachDetail = new CoachDetail();
+
+        coachDetail.setCoachId(coachId);
+
+        return ok(views.html.managethiscoach.render(coaches, coachDetail));
+
+    }
+
+    public Result postManageThisCoach(Integer teamId)
+    {
+        return redirect("/draftcoach");
+    }
+
 }
