@@ -7,13 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/stylesheets/imageoverlay.css">
+    <link rel="stylesheet" href="/assets/lib/font-awesome/css/fontawesome.css">
     <link rel="stylesheet" href="/assets/stylesheets/login.css">
+    <link rel="stylesheet" href="/assets/stylesheets/starrating.css">
 
     <script src="/assets/lib/jquery/jquery.min.js"></script>
     <script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-secondary" >
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;
     <a class="navbar-brand" href="/login">
         <img src="/assets/images/ftm.jpg" data-toggle="tooltip" title="Home" height="50">
@@ -55,17 +57,37 @@
                                 <div class="text">
                                     <button class="btn btn-success" name="Id" id="Id" value="@coach.getCoachId"><h6
                                             class="title">@coach.getCoachName</h6>
-                                    </button>
+                                    </button><br>
                                     @if(coach.getCoachTier == 5){
-
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
                                     }else if(coach.getCoachTier == 4){
-
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
                                     }else if(coach.getCoachTier == 3){
-
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
                                     }else if(coach.getCoachTier == 2){
-
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
                                     }else{
-
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
                                     }
                                     <p>Salary: @coach.getFormattedCoachSalary</p>
                                 </div>
