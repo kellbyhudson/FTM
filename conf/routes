@@ -7,6 +7,9 @@ GET     /login                          controllers.OwnerController.getLoginChoi
 GET     /newowner                       controllers.OwnerController.getNewOwner
 POST    /newowner                       controllers.OwnerController.postNewOwner
 GET     /returnowner                    controllers.OwnerController.getReturnOwner
+POST    /returnowner                    controllers.OwnerController.postReturnOwner
+GET     /ownerteams/:ownerId            controllers.OwnerController.getOwnerTeams(ownerId:Integer)
+
 
 GET     /addcoach                       controllers.CoachController.getAddCoach
 POST    /addcoach                       controllers.CoachController.postAddCoach

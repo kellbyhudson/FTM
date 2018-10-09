@@ -99,7 +99,7 @@ public class TeamController extends Controller
 
         CoachSpecialty coachSpecialty = jpaApi.em().createQuery(coachSpecialtySQL, CoachSpecialty.class).setParameter("coachSpecialtyId", coach.getCoachSpecialtyId()).getSingleResult();
 
-        Integer teamId = Integer.parseInt(session().get("THISteamId"));
+        Integer teamId = Integer.parseInt(session().get("MYteamId"));
 
         String teamPlayersSQL = "SELECT tp FROM TeamPlayer tp WHERE teamId = :teamId";
 
@@ -829,7 +829,7 @@ public class TeamController extends Controller
                     result = "teamlayout/";
                     result += teamId;
 
-                }catch (Exception e)
+                } catch (Exception e)
                 {
                     Integer teamSalary = Integer.parseInt(session().get("salary"));
                     String teamName = session().get("teamname");
@@ -1523,21 +1523,29 @@ public class TeamController extends Controller
     @Transactional
     public Result getManageThisTeam(Integer teamId)
     {
-        String sql = "SELECT t FROM Team t WHERE teamId = :teamId ";
+        session().put("MYteamId", teamId.toString());
+
+        session().put("THISteamId", teamId.toString());
+
+        String sql = "SELECT t FROM Team t WHERE t.teamId = :teamId ";
 
         Team existingTeam = jpaApi.em().createQuery(sql, Team.class).setParameter("teamId", teamId).getSingleResult();
 
-        sql = "SELECT c FROM Coach c WHERE coachId = :coachId ";
+        sql = "SELECT c FROM Coach c WHERE c.coachId = :coachId ";
 
         Coach coach = jpaApi.em().createQuery(sql, Coach.class).setParameter("coachId", existingTeam.getCoachId()).getSingleResult();
 
-        sql = "SELECT too FROM TakeOverOrganization WHERE takeOverOrganizationId = :takeOverOrganizationId ";
+        sql = "SELECT too FROM TakeOverOrganization too WHERE too.takeOverOrganizationId = :takeOverOrganizationId ";
 
         TakeOverOrganization takeOverOrganization = jpaApi.em().createQuery(sql, TakeOverOrganization.class).setParameter("takeOverOrganizationId", existingTeam.getTakeOverOrganizationId()).getSingleResult();
 
-        sql = "SELECT o FROM Owner o WHERE ownerId = :ownerId ";
+        sql = "SELECT o FROM Owner o WHERE o.ownerId = :ownerId ";
 
         Owner owner = jpaApi.em().createQuery(sql, Owner.class).setParameter("ownerId", existingTeam.getOwnerId()).getSingleResult();
+
+        session().put("ownerId", existingTeam.getOwnerId().toString());
+        session().put("coachId", existingTeam.getCoachId().toString());
+        session().put("takeOverOrganizationId", existingTeam.getTakeOverOrganizationId().toString());
 
         sql = "SELECT cs FROM CoachSpecialty cs WHERE coachSpecialtyId = :coachSpecialtyId ";
 
@@ -1970,7 +1978,340 @@ public class TeamController extends Controller
 
     public Result postManageThisTeam(Integer teamId)
     {
-        return ok();
+        String result = "";
+
+        Integer balance = Integer.parseInt(session().get("balance"));
+
+        if (balance >= 0)
+        {
+            try
+            {
+                teamId = Integer.parseInt(session().get("THISteamId"));
+
+                String playerSQL = "SELECT tp FROM TeamPlayer tp WHERE teamId = :teamId AND teamPlayerPositionId = :teamPlayerPositionId ORDER BY sortOrderId";
+
+                List<TeamPlayer> quarterbacksList = jpaApi.em().createQuery(playerSQL, TeamPlayer.class).setParameter("teamId", teamId).setParameter("teamPlayerPositionId", 1).getResultList();
+
+                List<Quarterback> quarterbacks = new ArrayList<>();
+                for (TeamPlayer quarterback : quarterbacksList)
+                {
+                    Quarterback quarterback1 = new Quarterback();
+                    quarterback1.setName(quarterback.getTeamPlayerName());
+                    quarterback1.setValue(quarterback.getTeamPlayerValue());
+                    quarterbacks.add(quarterback1);
+                }
+
+                List<TeamPlayer> runningBacksList = jpaApi.em().createQuery(playerSQL, TeamPlayer.class).setParameter("teamId", teamId).setParameter("teamPlayerPositionId", 2).getResultList();
+
+                List<RunningBack> runningBacks = new ArrayList<>();
+                for (TeamPlayer runningback : runningBacksList)
+                {
+                    RunningBack runningBack = new RunningBack();
+                    runningBack.setName(runningback.getTeamPlayerName());
+                    runningBack.setValue(runningback.getTeamPlayerValue());
+                    runningBacks.add(runningBack);
+                }
+
+                List<TeamPlayer> wideReceiver1List = jpaApi.em().createQuery(playerSQL, TeamPlayer.class).setParameter("teamId", teamId).setParameter("teamPlayerPositionId", 3).getResultList();
+
+                List<WideReceiver1> wideReceiver1s = new ArrayList<>();
+                for (TeamPlayer wideReceiver : wideReceiver1List)
+                {
+                    WideReceiver1 wideReceiver1 = new WideReceiver1();
+                    wideReceiver1.setName(wideReceiver.getTeamPlayerName());
+                    wideReceiver1.setValue(wideReceiver.getTeamPlayerValue());
+                    wideReceiver1s.add(wideReceiver1);
+                }
+
+                List<TeamPlayer> tightEndsList = jpaApi.em().createQuery(playerSQL, TeamPlayer.class).setParameter("teamId", teamId).setParameter("teamPlayerPositionId", 4).getResultList();
+
+                List<TightEnd> tightEnds = new ArrayList<>();
+                for (TeamPlayer tightEnd : tightEndsList)
+                {
+                    TightEnd tightEnd1 = new TightEnd();
+                    tightEnd1.setName(tightEnd.getTeamPlayerName());
+                    tightEnd1.setValue(tightEnd.getTeamPlayerValue());
+                    tightEnds.add(tightEnd1);
+                }
+
+                List<TeamPlayer> tackleList = jpaApi.em().createQuery(playerSQL, TeamPlayer.class).setParameter("teamId", teamId).setParameter("teamPlayerPositionId", 5).getResultList();
+
+                List<Tackle1> tackle1s = new ArrayList<>();
+                for (TeamPlayer tackle : tackleList)
+                {
+                    Tackle1 tackle1 = new Tackle1();
+                    tackle1.setName(tackle.getTeamPlayerName());
+                    tackle1.setValue(tackle.getTeamPlayerValue());
+                    tackle1s.add(tackle1);
+                }
+
+                List<TeamPlayer> guardList = jpaApi.em().createQuery(playerSQL, TeamPlayer.class).setParameter("teamId", teamId).setParameter("teamPlayerPositionId", 6).getResultList();
+
+                List<Guard1> guard1s = new ArrayList<>();
+                for (TeamPlayer guard : guardList)
+                {
+                    Guard1 guard1 = new Guard1();
+                    guard1.setName(guard.getTeamPlayerName());
+                    guard1.setValue(guard.getTeamPlayerValue());
+                    guard1s.add(guard1);
+                }
+
+                List<TeamPlayer> centersList = jpaApi.em().createQuery(playerSQL, TeamPlayer.class).setParameter("teamId", teamId).setParameter("teamPlayerPositionId", 7).getResultList();
+
+                List<Center> centers = new ArrayList<>();
+                for (TeamPlayer center : centersList)
+                {
+                    Center center1 = new Center();
+                    center1.setName(center.getTeamPlayerName());
+                    center1.setValue(center.getTeamPlayerValue());
+                    centers.add(center1);
+                }
+
+                List<TeamPlayer> defensiveTackleList = jpaApi.em().createQuery(playerSQL, TeamPlayer.class).setParameter("teamId", teamId).setParameter("teamPlayerPositionId", 8).getResultList();
+
+                List<DefensiveTackle1> defensiveTackle1s = new ArrayList<>();
+                for (TeamPlayer defensivetackle : defensiveTackleList)
+                {
+                    DefensiveTackle1 defensiveTackle1 = new DefensiveTackle1();
+                    defensiveTackle1.setName(defensivetackle.getTeamPlayerName());
+                    defensiveTackle1.setValue(defensivetackle.getTeamPlayerValue());
+                    defensiveTackle1s.add(defensiveTackle1);
+                }
+
+                List<TeamPlayer> defensiveEndList = jpaApi.em().createQuery(playerSQL, TeamPlayer.class).setParameter("teamId", teamId).setParameter("teamPlayerPositionId", 9).getResultList();
+
+                List<DefensiveEnd1> defensiveEnd1s = new ArrayList<>();
+                for (TeamPlayer defensiveend : defensiveEndList)
+                {
+                    DefensiveEnd1 defensiveEnd1 = new DefensiveEnd1();
+                    defensiveEnd1.setName(defensiveend.getTeamPlayerName());
+                    defensiveEnd1.setValue(defensiveend.getTeamPlayerValue());
+                    defensiveEnd1s.add(defensiveEnd1);
+                }
+
+                List<TeamPlayer> outsideLinebackerList = jpaApi.em().createQuery(playerSQL, TeamPlayer.class).setParameter("teamId", teamId).setParameter("teamPlayerPositionId", 10).getResultList();
+
+                List<OutsideLinebacker1> outsideLinebacker1s = new ArrayList<>();
+                for (TeamPlayer outsidelinebacker : outsideLinebackerList)
+                {
+                    OutsideLinebacker1 outsideLinebacker1 = new OutsideLinebacker1();
+                    outsideLinebacker1.setName(outsidelinebacker.getTeamPlayerName());
+                    outsideLinebacker1.setValue(outsidelinebacker.getTeamPlayerValue());
+                    outsideLinebacker1s.add(outsideLinebacker1);
+                }
+
+                List<TeamPlayer> insideLinebackerList = jpaApi.em().createQuery(playerSQL, TeamPlayer.class).setParameter("teamId", teamId).setParameter("teamPlayerPositionId", 11).getResultList();
+
+                List<InsideLinebacker> insideLinebackers1 = new ArrayList<>();
+                for (TeamPlayer insidelinebacker : insideLinebackerList)
+                {
+                    InsideLinebacker insideLinebacker = new InsideLinebacker();
+                    insideLinebacker.setName(insidelinebacker.getTeamPlayerName());
+                    insideLinebacker.setValue(insidelinebacker.getTeamPlayerValue());
+                    insideLinebackers1.add(insideLinebacker);
+                }
+
+                List<TeamPlayer> safetyList = jpaApi.em().createQuery(playerSQL, TeamPlayer.class).setParameter("teamId", teamId).setParameter("teamPlayerPositionId", 12).getResultList();
+
+                List<Safety1> safety1s = new ArrayList<>();
+                for (TeamPlayer safety : safetyList)
+                {
+                    Safety1 safety1 = new Safety1();
+                    safety1.setName(safety.getTeamPlayerName());
+                    safety1.setValue(safety.getTeamPlayerValue());
+                    safety1s.add(safety1);
+                }
+
+                List<TeamPlayer> cornerbackList = jpaApi.em().createQuery(playerSQL, TeamPlayer.class).setParameter("teamId", teamId).setParameter("teamPlayerPositionId", 13).getResultList();
+
+                List<Cornerback1> cornerback1s = new ArrayList<>();
+                for (TeamPlayer cornerback : cornerbackList)
+                {
+                    Cornerback1 cornerback1 = new Cornerback1();
+                    cornerback1.setName(cornerback.getTeamPlayerName());
+                    cornerback1.setValue(cornerback.getTeamPlayerValue());
+                    cornerback1s.add(cornerback1);
+                }
+
+                List<TeamPlayer> kickerList = jpaApi.em().createQuery(playerSQL, TeamPlayer.class).setParameter("teamId", teamId).setParameter("teamPlayerPositionId", 15).getResultList();
+
+                List<Kicker> kickers = new ArrayList<>();
+                for (TeamPlayer kicker : kickerList)
+                {
+                    Kicker kicker1 = new Kicker();
+                    kicker1.setName(kicker.getTeamPlayerName());
+                    kicker1.setValue(kicker.getTeamPlayerValue());
+                    kickers.add(kicker1);
+                }
+
+                List<TeamPlayer> puntersList = jpaApi.em().createQuery(playerSQL, TeamPlayer.class).setParameter("teamId", teamId).setParameter("teamPlayerPositionId", 14).getResultList();
+
+                List<Punter> punters = new ArrayList<>();
+                for (TeamPlayer punter : puntersList)
+                {
+                    Punter punter1 = new Punter();
+                    punter1.setName(punter.getTeamPlayerName());
+                    punter1.setValue(punter.getTeamPlayerValue());
+                    punters.add(punter1);
+                }
+
+                List<TeamPlayer> holderlist = jpaApi.em().createQuery(playerSQL, TeamPlayer.class).setParameter("teamId", teamId).setParameter("teamPlayerPositionId", 16).getResultList();
+
+                List<Holder> holders = new ArrayList<>();
+                for (TeamPlayer holder : holderlist)
+                {
+                    Holder holder1 = new Holder();
+                    holder1.setName(holder.getTeamPlayerName());
+                    holder1.setValue(holder.getTeamPlayerValue());
+                    holders.add(holder1);
+                }
+
+                List<TeamPlayer> longsnapperlist = jpaApi.em().createQuery(playerSQL, TeamPlayer.class).setParameter("teamId", teamId).setParameter("teamPlayerPositionId", 17).getResultList();
+
+                List<LongSnapper> longsnappers = new ArrayList<>();
+                for (TeamPlayer longsnapper : longsnapperlist)
+                {
+                    LongSnapper longSnapper1 = new LongSnapper();
+                    longSnapper1.setName(longsnapper.getTeamPlayerName());
+                    longSnapper1.setValue(longsnapper.getTeamPlayerValue());
+                    longsnappers.add(longSnapper1);
+                }
+
+                Quarterback quarterback = quarterbacks.get(0);
+                Quarterback quarterback2 = quarterbacks.get(1);
+                Quarterback quarterback3 = quarterbacks.get(2);
+
+                RunningBack runningBack = runningBacks.get(0);
+                RunningBack runningBack2 = runningBacks.get(1);
+                RunningBack runningBack3 = runningBacks.get(2);
+
+                WideReceiver1 wideReceiver1 = wideReceiver1s.get(0);
+                WideReceiver1 wideReceiver2 = wideReceiver1s.get(1);
+                WideReceiver1 wideReceiver3 = wideReceiver1s.get(2);
+                WideReceiver1 wideReceiver4 = wideReceiver1s.get(3);
+                WideReceiver1 wideReceiver5 = wideReceiver1s.get(4);
+                WideReceiver1 wideReceiver6 = wideReceiver1s.get(5);
+
+                TightEnd tightEnd = tightEnds.get(0);
+                TightEnd tightEnd2 = tightEnds.get(1);
+
+                Tackle1 tackle1 = tackle1s.get(0);
+                Tackle1 tackle2 = tackle1s.get(1);
+                Tackle1 tackle3 = tackle1s.get(2);
+                Tackle1 tackle4 = tackle1s.get(3);
+
+                Guard1 guard1 = guard1s.get(0);
+                Guard1 guard2 = guard1s.get(1);
+                Guard1 guard3 = guard1s.get(2);
+                Guard1 guard4 = guard1s.get(3);
+
+                Center center = centers.get(0);
+                Center center2 = centers.get(1);
+
+                DefensiveTackle1 defensiveTackle1 = defensiveTackle1s.get(0);
+                DefensiveTackle1 defensiveTackle2 = defensiveTackle1s.get(1);
+                DefensiveTackle1 defensiveTackle3 = defensiveTackle1s.get(2);
+                DefensiveTackle1 defensiveTackle4 = defensiveTackle1s.get(3);
+                DefensiveTackle1 defensiveTackle5 = defensiveTackle1s.get(4);
+
+                DefensiveEnd1 defensiveEnd1 = defensiveEnd1s.get(0);
+                DefensiveEnd1 defensiveEnd2 = defensiveEnd1s.get(1);
+                DefensiveEnd1 defensiveEnd3 = defensiveEnd1s.get(2);
+                DefensiveEnd1 defensiveEnd4 = defensiveEnd1s.get(3);
+                DefensiveEnd1 defensiveEnd5 = defensiveEnd1s.get(4);
+
+                OutsideLinebacker1 outsideLinebacker1 = outsideLinebacker1s.get(0);
+                OutsideLinebacker1 outsideLinebacker2 = outsideLinebacker1s.get(1);
+                OutsideLinebacker1 outsideLinebacker3 = outsideLinebacker1s.get(2);
+                OutsideLinebacker1 outsideLinebacker4 = outsideLinebacker1s.get(3);
+
+                InsideLinebacker insideLinebacker = insideLinebackers1.get(0);
+                InsideLinebacker insideLinebacker2 = insideLinebackers1.get(1);
+                InsideLinebacker insideLinebacker3 = insideLinebackers1.get(2);
+
+                Safety1 safety1 = safety1s.get(0);
+                Safety1 safety2 = safety1s.get(1);
+                Safety1 safety3 = safety1s.get(2);
+                Safety1 safety4 = safety1s.get(3);
+
+                Cornerback1 cornerback1 = cornerback1s.get(0);
+                Cornerback1 cornerback2 = cornerback1s.get(1);
+                Cornerback1 cornerback3 = cornerback1s.get(2);
+                Cornerback1 cornerback4 = cornerback1s.get(3);
+
+                Kicker kicker = kickers.get(0);
+                Punter punter = punters.get(0);
+
+                Holder holder = holders.get(0);
+                LongSnapper longSnapper = longsnappers.get(0);
+
+
+                String sql = "SELECT t FROM Team t WHERE teamId = :teamId ";
+
+                Team team = jpaApi.em().createQuery(sql, Team.class).setParameter("teamId", teamId).getSingleResult();
+
+                try
+                {
+                    session().put("salary", team.getTeamSalary().toString());
+                    session().put("teamname", team.getTeamName());
+                    session().put("teamcity", team.getTeamCity());
+                    session().put("ownerId", team.getOwnerId().toString());
+                    session().put("coachId", team.getCoachId().toString());
+                    session().put("takeOverOrganizationId", team.getTakeOverOrganizationId().toString());
+
+                    Integer teamSalary = Integer.parseInt(session().get("salary"));
+                    String teamName = session().get("teamname");
+                    String teamCity = session().get("teamcity");
+                    Integer ownerId = Integer.parseInt(session().get("ownerId"));
+                    Integer coachId = Integer.parseInt(session().get("coachId"));
+                    Integer takeOverOrganizationId = Integer.parseInt(session().get("takeOverOrganizationId"));
+
+
+                    team.setTeamId(teamId);
+                    team.setTeamCity(teamCity);
+                    team.setTeamName(teamName);
+                    team.setOwnerId(ownerId);
+                    team.setCoachId(coachId);
+                    team.setTakeOverOrganizationId(takeOverOrganizationId);
+                    team.setTeamSalary(teamSalary);
+                    jpaApi.em().persist(team);
+                    result = "teamlayout/";
+                    result += teamId;
+
+                } catch (Exception e)
+                {
+                    Integer teamSalary = Integer.parseInt(session().get("salary"));
+                    String teamName = session().get("teamname");
+                    String teamCity = session().get("teamcity");
+                    Integer ownerId = Integer.parseInt(session().get("ownerId"));
+                    Integer coachId = Integer.parseInt(session().get("coachId"));
+                    Integer takeOverOrganizationId = Integer.parseInt(session().get("takeOverOrganizationId"));
+
+                    team.setTeamId(teamId);
+                    team.setTeamCity(teamCity);
+                    team.setTeamName(teamName);
+                    team.setOwnerId(ownerId);
+                    team.setCoachId(coachId);
+                    team.setTakeOverOrganizationId(takeOverOrganizationId);
+                    team.setTeamSalary(teamSalary);
+                    jpaApi.em().persist(team);
+                    result = "teamlayout/";
+                    result += teamId;
+                }
+
+
+            } catch (Exception e)
+            {
+                result = "draftteam";
+            }
+        }
+        else
+        {
+            result = "draftteam";
+        }
+
+
+        return redirect("/" + result);
     }
 
 }

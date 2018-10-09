@@ -1,0 +1,34 @@
+/* Style the video: 100% width and height to cover the entire window */
+#myVideo {
+    position: fixed;
+    z-index: 0;
+    right: 0;
+    top: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.btn  {
+  position: relative;
+  z-index: 0; /* The z-index should be higher than Google Maps */
+  background-color: #4CAF50;
+  height: auto;
+  opacity: 1; /* Set the opacity for a slightly transparent Google Form */
+}
+
+.navbar {
+   position: relative;
+   z-index:1;
+}
+
+#mySidenav, .nav-link, .closebtn {
+   z-index: 2;
+}
+
+.header {
+          position: relative;
+          z-index: 0; /* The z-index should be higher than Google Maps */
+          color: white;
+          height: auto;
+          opacity: 1; /* Set the opacity for a slightly transparent Google Form */
+        }

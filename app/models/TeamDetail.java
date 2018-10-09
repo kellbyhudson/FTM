@@ -28,6 +28,10 @@ public class TeamDetail
     private String formattedTeamSalaryAccrued;
     private String formattedTeamSalaryBalance;
 
+    public void setTeamId(Integer teamId)
+    {
+        this.teamId = teamId;
+    }
 
     public Integer getOwnerId()
     {

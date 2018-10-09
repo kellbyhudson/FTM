@@ -1,6 +1,9 @@
 package controllers;
 
+import models.DefaultList;
 import models.Owner;
+import models.Team;
+import models.TeamDetail;
 import play.data.DynamicForm;
 import play.data.FormFactory;
 import play.db.jpa.JPAApi;
@@ -10,6 +13,9 @@ import play.mvc.Result;
 import play.twirl.api.Html;
 
 import javax.inject.Inject;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OwnerController extends Controller
 {
@@ -83,7 +89,70 @@ public class OwnerController extends Controller
     @Transactional
     public Result getReturnOwner()
     {
-        return ok(views.html.returningownerlogin.render());
+        String sql = "SELECT o FROM Owner o ";
+
+        List<Owner> ownerList = jpaApi.em().createQuery(sql, Owner.class).getResultList();
+
+        List<DefaultList> defaultLists = new ArrayList<>();
+        for (Owner owner : ownerList)
+        {
+            DefaultList defaultList = new DefaultList();
+            defaultList.setEmail(owner.getOwnerEmail());
+            defaultList.setPassword(owner.getOwnerPassword());
+            defaultLists.add(defaultList);
+        }
+
+        return ok(views.html.returningownerlogin.render(defaultLists.get(defaultLists.size()-1)));
+    }
+
+    @Transactional
+    public Result postReturnOwner()
+    {
+        DynamicForm form = formFactory.form().bindFromRequest();
+
+        String emailText = form.get("ownerEmail");
+
+        String passwordText = form.get("password");
+
+        String result = "";
+
+        String sql = "SELECT o FROM Owner o WHERE o.ownerEmail = :ownerEmail ";
+
+        Owner owner = jpaApi.em().createQuery(sql, Owner.class).setParameter("ownerEmail", emailText).getSingleResult();
+
+        if (owner.getOwnerPassword().equals(passwordText))
+        {
+            result = "/ownerteams/";
+            result += owner.getOwnerId();
+        }
+        else
+        {
+            result = "/returnowner";
+        }
+
+
+        return redirect(result);
+    }
+
+    @Transactional
+    public Result getOwnerTeams(Integer ownerId)
+    {
+        String sql = "SELECT t FROM Team t WHERE ownerId = :ownerId ";
+
+        List<Team> teamList = jpaApi.em().createQuery(sql, Team.class).setParameter("ownerId", ownerId).getResultList();
+
+        List<TeamDetail> teamDetailList = new ArrayList<>();
+        for(Team team : teamList)
+        {
+            TeamDetail teamDetail = new TeamDetail();
+            teamDetail.setTeamId(team.getTeamId());
+            teamDetail.setTeamName(team.getTeamCity() + " " + team.getTeamName());
+            BigDecimal salary = new BigDecimal(""+team.getTeamSalary());
+            teamDetail.setOrganizationSalaryCap(salary);
+            teamDetailList.add(teamDetail);
+        }
+
+        return ok(views.html.ownerteams.render(teamDetailList));
     }
 
     public Result getTestLogin()

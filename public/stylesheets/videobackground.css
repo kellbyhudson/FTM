@@ -1,0 +1,49 @@
+/* Style the video: 100% width and height to cover the entire window */
+#myVideo {
+    position: fixed;
+    right: 0;
+    top: 75px;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+#form {
+  position: relative;
+  z-index: 1; /* The z-index should be higher than Google Maps */
+  width: 250px;
+  margin: 60px auto 0;
+  padding: 10px;
+  background: white;
+  height: auto;
+  opacity: .95; /* Set the opacity for a slightly transparent Google Form */
+  color: black;
+}
+
+/* Full-width input fields */
+  input[type=email], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=email]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit button */
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+input[type=submit]:hover {
+  opacity: 1;
+}
