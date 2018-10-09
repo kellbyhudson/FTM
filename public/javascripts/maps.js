@@ -5,13 +5,6 @@ function myMap() {
   center:myCenter,
   zoom:18,
   mapTypeId:google.maps.MapTypeId.SATELLITE,
-  panControl: false,
-      zoomControl: true,
-      mapTypeControl: true,
-      scaleControl: true,
-      streetViewControl: true,
-      overviewMapControl: false,
-      rotateControl: true
   };
   var map = new google.maps.Map(mapCanvas,mapOptions);
   var marker = new google.maps.Marker({

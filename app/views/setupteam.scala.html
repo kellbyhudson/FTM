@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/stylesheets/textoverimage.css">
+    <link rel="stylesheet" href="/assets/stylesheets/formoverimage2.css">
     <link rel="stylesheet" href="/assets/stylesheets/slideshow.css">
     <link rel="stylesheet" href="/assets/stylesheets/login.css">
 
@@ -13,7 +13,7 @@
     <script src="/assets/lib/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-secondary" >
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;
     <a class="navbar-brand" href="/login">
         <img src="/assets/images/ftm.jpg" data-toggle="tooltip" title="Home" height="50">
@@ -38,59 +38,53 @@
     </div>
 </nav>
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <!-- Slideshow container -->
+    <div id="map">
+        <!-- Slideshow container -->
 
-            <div class="container">
-                <div class="slideshow-container">
+        <div class="container">
+            <div class="slideshow-container">
 
-                    <!-- Full-width images with number and caption text -->
-                    <div class="mySlides fade">
-                        <img src="/assets/images/att1200.jpg" style="width:100%">
-                    </div>
-
-                    <div class="mySlides fade">
-                        <img src="/assets/images/chargers1200.jpg" style="width:100%">
-                    </div>
-
-                    <div class="mySlides fade">
-                        <img src="/assets/images/chiefs1200.jpg" style="width:100%">
-                    </div>
-
-                    <div class="mySlides fade">
-                        <img src="/assets/images/stadium1200.jpg" style="width:100%">
-                    </div>
-
-                    <div class="mySlides fade">
-                        <img src="/assets/images/vikings1200.jpg" style="width:100%">
-                    </div>
+                <!-- Full-width images with number and caption text -->
+                <div class="mySlides fade">
+                    <img src="/assets/images/att1200.jpg">
                 </div>
 
-                <div class="top-left"><p class="display-2">Setup Your NFL Team</p>
-                    <form method="POST">
-                        @helper.CSRF.formField
-                        <label for="teamcity">Team City: </label><input type="text" name="teamcity" id="teamcity"
-                                                                        placeholder="Team City Here"
-                                                                        required="required">
-                        <br><label for="teamname">Team Name: </label><input type="text" name="teamname" id="teamname"
-                                                                            placeholder="Team Name Here"
-                                                                            required="required">
-
-                        <br><input type="submit" value="Continue">
-                    </form>
+                <div class="mySlides fade">
+                    <img src="/assets/images/chargers1200.jpg">
                 </div>
 
-                <div class="centered">
-
+                <div class="mySlides fade">
+                    <img src="/assets/images/chiefs1200.jpg">
                 </div>
-                <script src="/assets/javascripts/slideshow.js"></script>
+
+                <div class="mySlides fade">
+                    <img src="/assets/images/stadium1200.jpg">
+                </div>
+
+                <div class="mySlides fade">
+                    <img src="/assets/images/vikings1200.jpg">
+                </div>
             </div>
+        </div>
+    </div>
+    <div id="form">
+        <div class="form"><p class="text-center"><b>Setup Your NFL Team</b></p>
+            <form method="POST">
+                @helper.CSRF.formField
+                <label for="teamcity"></label><input type="text" name="teamcity" id="teamcity"
+                                                                placeholder="Team City Here"
+                                                                required="required">
+                <br><label for="teamname"></label><input type="text" name="teamname" id="teamname"
+                                                                    placeholder="Team Name Here"
+                                                                    required="required">
 
+                <br><input type="submit" value="Continue">
+            </form>
         </div>
     </div>
 </div>
 <script src="/assets/javascripts/login.js"></script>
+<script src="/assets/javascripts/slideshow.js"></script>
 
 </body>
 </html>
