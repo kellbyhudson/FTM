@@ -89,20 +89,16 @@ public class OwnerController extends Controller
     @Transactional
     public Result getReturnOwner()
     {
-        String sql = "SELECT o FROM Owner o ";
+        String sql = "SELECT o FROM Owner o WHERE ownerId = 19";
 
-        List<Owner> ownerList = jpaApi.em().createQuery(sql, Owner.class).getResultList();
+        Owner ownerRetrieve = jpaApi.em().createQuery(sql, Owner.class).getSingleResult();
 
-        List<DefaultList> defaultLists = new ArrayList<>();
-        for (Owner owner : ownerList)
-        {
-            DefaultList defaultList = new DefaultList();
-            defaultList.setEmail(owner.getOwnerEmail());
-            defaultList.setPassword(owner.getOwnerPassword());
-            defaultLists.add(defaultList);
-        }
+        DefaultList defaultLists = new DefaultList();
 
-        return ok(views.html.returningownerlogin.render(defaultLists.get(defaultLists.size()-1)));
+        defaultLists.setEmail(ownerRetrieve.getOwnerEmail());
+        defaultLists.setPassword(ownerRetrieve.getOwnerPassword());
+
+        return ok(views.html.returningownerlogin.render(defaultLists));
     }
 
     @Transactional

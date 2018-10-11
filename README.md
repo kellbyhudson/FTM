@@ -1,8 +1,7 @@
-# ArchaeoLogic
-An Archaeological Database Management System that promotes data integrity and streamlines the data entry process for
-a laboratory technician. All functionality demonstrated follows the guidlines and procedures required by the state of
-Arkansas. This program was created as a capstone project concluding my time at the Arkansas Coding Academy.
-[![Home_Page.png](https://i.postimg.cc/tgBf894w/Home_Page.png)](https://postimg.cc/Z9yVdt3x)
+# Football Team Manager
+A Player Personnel Database Management System that promotes data integrity and streamlines the data entry process for
+a pseudo organization Owner. This program was created as a capstone project concluding my time at the Arkansas Coding Academy.
+[![loginscreen.png](https://i.postimg.cc/KcpRjL07/loginscreen.png)](https://postimg.cc/Sj8ytXFj)
 ## Build Summary
 Tools used:
 - Java
@@ -15,24 +14,24 @@ Tools used:
 - SQL Power Architect
 
 ## Functionality
-The user can search through the each individual unit in the database
-[![Unit_Table.png](https://i.postimg.cc/KjJWpvKp/Unit_Table.png)](https://postimg.cc/SYYVJ4fc)
+The user can login as a new Owner Account or return using their login credentials to view/manage existing Owner data
 
-By clicking on a unit, the user can add new artifacts, see/edit existing artifacts, or see the associated 
-catalog numbers
 
-[![New_Artifact_Screen.png](https://i.postimg.cc/d3sQpB6s/New_Artifact_Screen.png)](https://postimg.cc/ZBQhy6X2)
+[![newuser.png](https://i.postimg.cc/Hn8HVJL3/newuser.png)](https://postimg.cc/RJm2YZKn)
+[![returnuser.png](https://i.postimg.cc/HLPkn12Y/returnuser.png)](https://postimg.cc/NymcCVSS)
 
-[![Existing_Artifacts.png](https://i.postimg.cc/T1b8kWMd/Existing_Artifacts.png)](https://postimg.cc/vxGSTTZk)
 
-Within the "Report Tools" function, the user has access to a few report-building and site-awareness tools such as various charts showing important
- information about a site
-[![Pie_Chart.png](https://i.postimg.cc/2j4cVyvZ/Pie_Chart.png)](https://postimg.cc/yW8XGVL1)
+#### By clicking on a Players position the user can draft new players using name search, minimum salary sorting, 
+#### and Players college filters, and see the salary implications.
 
-[![Line_Chart.png](https://i.postimg.cc/JnB1bZmm/Line_Chart.png)](https://postimg.cc/qh4VrtzZ)
+[![draft.png](https://i.postimg.cc/d0ZzRMFt/draft.png)](https://postimg.cc/Jym6m2t9)
 
-In addition, the user can access a filterable table of all artifacts currently in the database
-[![Report_Table.png](https://i.postimg.cc/52xw9qWX/Report_Table.png)](https://postimg.cc/PPRL2DxH)
 
-Finally, the user can generate a PDF of all of the artifacts in the database, detailing all the state-required information
-[![PDF.png](https://i.postimg.cc/hvC8mXBL/PDF.png)](https://postimg.cc/8f6rQPsc)
+#### Within the "Team Layout" function, the user has access to a few report-building and site-awareness tools such as various charts showing important
+#### information about a teams composition.
+ 
+ 
+[![reports.png](https://i.postimg.cc/t701TG9Z/reports.png)](https://postimg.cc/zHjDtMb8)
+
+[![teamlayout.png](https://i.postimg.cc/t4NzL2zt/teamlayout.png)](https://postimg.cc/Snj89L3J)
+

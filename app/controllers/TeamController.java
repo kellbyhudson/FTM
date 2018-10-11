@@ -517,7 +517,18 @@ public class TeamController extends Controller
         teamDetail.setOrganizationSalaryCap(takeOverOrganization.getOrganizationSalaryCap());
         teamDetail.setCoachSpecialtyName(coachSpecialty.getCoachSpecialtyName());
         teamDetail.setCoachTier(coach.getCoachTier());
-        teamDetail.setTeamName(session().get("teamName"));
+
+        try{
+            String sql = "SELECT t FROM Team t WHERE t.teamId = :teamId ";
+
+            Team team = jpaApi.em().createQuery(sql, Team.class).setParameter("teamId", teamId).getSingleResult();
+
+            teamDetail.setTeamName(team.getTeamCity() + " " + team.getTeamName());
+
+        } catch (Exception e)
+        {
+            teamDetail.setTeamName(session().get("teamName"));
+        }
 
 
         session().put("balance", teamDetail.getTeamSalaryBalance().toString());
@@ -1966,7 +1977,17 @@ public class TeamController extends Controller
         teamDetail.setOrganizationSalaryCap(takeOverOrganization.getOrganizationSalaryCap());
         teamDetail.setCoachSpecialtyName(coachSpecialty.getCoachSpecialtyName());
         teamDetail.setCoachTier(coach.getCoachTier());
-        teamDetail.setTeamName(session().get("teamName"));
+        try{
+            sql = "SELECT t FROM Team t WHERE t.teamId = :teamId ";
+
+            Team team = jpaApi.em().createQuery(sql, Team.class).setParameter("teamId", teamId).getSingleResult();
+
+            teamDetail.setTeamName(team.getTeamCity() + " " + team.getTeamName());
+
+        } catch (Exception e)
+        {
+            teamDetail.setTeamName(session().get("teamName"));
+        }
 
 
         session().put("balance", teamDetail.getTeamSalaryBalance().toString());

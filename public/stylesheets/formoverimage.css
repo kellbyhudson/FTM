@@ -9,7 +9,7 @@
 
 #form {
   position: relative;
-  z-index: 1; /* The z-index should be higher than Google Maps */
+  z-index: 0; /* The z-index should be higher than Google Maps */
   left: 25px;
   width: 225px;
   margin: 60px 60px;
