@@ -14,21 +14,19 @@ Tools used:
 - SQL Power Architect
 
 ## Functionality
-The user can login as a new Owner Account or return using their login credentials to view/manage existing Owner data
+#### The user can login as a new Owner Account or return using their login credentials to view/manage existing Owner data
 
 
 [![newuser.png](https://i.postimg.cc/Hn8HVJL3/newuser.png)](https://postimg.cc/RJm2YZKn)
 [![returnuser.png](https://i.postimg.cc/HLPkn12Y/returnuser.png)](https://postimg.cc/NymcCVSS)
 
 
-#### By clicking on a Players position the user can draft new players using name search, minimum salary sorting, 
-#### and Players college filters, and see the salary implications.
+#### By clicking on a Players position the user can draft new players using name search, minimum salary sorting, and Players college filters, and see the salary implications.
 
 [![draft.png](https://i.postimg.cc/d0ZzRMFt/draft.png)](https://postimg.cc/Jym6m2t9)
 
 
-#### Within the "Team Layout" function, the user has access to a few report-building and site-awareness tools such as various charts showing important
-#### information about a teams composition.
+#### Within the "Team Layout" function, the user has access to a few report-building and site-awareness tools such as various charts showing important information about a teams composition.
  
  
 [![reports.png](https://i.postimg.cc/t701TG9Z/reports.png)](https://postimg.cc/zHjDtMb8)
