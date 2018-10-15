@@ -1,6 +1,10 @@
 # Football Team Manager
 A Player Personnel Database Management System that promotes data integrity and streamlines the data entry process for
 a pseudo organization Owner. This program was created as a capstone project concluding my time at the Arkansas Coding Academy.
+
+The SQL Database can be found at /sql/sqldatabase.sql within this file folder.
+
+
 [![loginscreen.png](https://i.postimg.cc/KcpRjL07/loginscreen.png)](https://postimg.cc/Sj8ytXFj)
 ## Build Summary
 Tools used:
